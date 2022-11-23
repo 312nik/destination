@@ -11,7 +11,7 @@ import java.util.List;
 
 public class UserService {
 
-    private UserRepository userRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -36,13 +36,13 @@ public class UserService {
 
     }
 
-    public void update(Long id, User updateUser) {
+    public void update(long id, User updateUser) {
 
         updateUser.setId(id);
         userRepository.save(updateUser);
     }
 
-    public void deleteUser(Long id) {
+    public void deleteUser(long id) {
 
         userRepository.deleteById(id);
 
