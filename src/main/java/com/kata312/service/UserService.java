@@ -36,13 +36,13 @@ public class UserService {
 
     }
 
-    public void update(long id, User updateUser) {
+    public void update(Long id, User updateUser) {
 
         updateUser.setId(id);
         userRepository.save(updateUser);
     }
 
-    public void deleteUser(long id) {
+    public void deleteUser(Long id) {
 
         userRepository.deleteById(id);
 
