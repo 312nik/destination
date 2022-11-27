@@ -21,12 +21,18 @@ public class UserController {
 
         this.userService = userService;
     }
+    @GetMapping("/")
+    public String begin(Model model) {
+        List<User> users = userService.findAll();
+        model.addAttribute("users", users);
+        return "/users";
+    }
 
     @GetMapping("/users")
     public String index(Model model) {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
-        return "users";
+        return "/users";
     }
 
     @GetMapping("/new")
