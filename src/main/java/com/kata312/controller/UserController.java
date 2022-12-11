@@ -21,8 +21,9 @@ public class UserController {
 
         this.userService = userService;
     }
+
     @GetMapping("/")
-    public String begin(Model model) {
+    public String showAllUsers(Model model) {
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
         return "/users";
@@ -35,13 +36,14 @@ public class UserController {
         return "/users";
     }
 
+
     @GetMapping("/new")
-    public String newPerson(User user) {
+    public String createUserForm(User user) {
         return "/new";
     }
 
     @PostMapping("/new")
-    public String create(User user) {
+    public String createUser(User user) {
 
         userService.saveUser(user);
         return "redirect:/users";
