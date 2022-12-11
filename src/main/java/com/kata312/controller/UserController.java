@@ -1,7 +1,7 @@
 package com.kata312.controller;
 
 import com.kata312.model.User;
-import com.kata312.service.UserService;
+import com.kata312.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,10 +14,10 @@ import java.util.List;
 
 public class UserController {
 
-    private final UserService userService;
+    private final UserServiceImpl userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public UserController(UserServiceImpl userService) {
 
         this.userService = userService;
     }

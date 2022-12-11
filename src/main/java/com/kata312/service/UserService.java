@@ -1,50 +1,22 @@
 package com.kata312.service;
 
 import com.kata312.model.User;
-import com.kata312.repository.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+public interface UserService {
 
-public class UserService {
+    List<User> findAll();
 
-    private final UserRepository userRepository;
+    User findById(Long id);
 
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
+    void saveUser(User user);
 
-    public User findById(Long id) {
+    void update(Long id, User updateUser);
 
-        return userRepository.findById(id).orElse(null);
-
-    }
-
-    public List<User> findAll() {
-
-        return userRepository.findAll();
-
-    }
-
-    public User saveUser(User user) {
-
-        return userRepository.save(user);
-
-    }
-
-    public void update(Long id, User updateUser) {
-
-        updateUser.setId(id);
-        userRepository.save(updateUser);
-    }
-
-    public void deleteUser(Long id) {
-
-        userRepository.deleteById(id);
-
-    }
+    void deleteUser(Long id);
 }
+
+
+
+
