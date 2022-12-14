@@ -4,11 +4,12 @@ import com.kata312.model.User;
 import com.kata312.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-
+@Transactional(readOnly = true)
 public class UserServiceImpl  implements UserService{
 
     private final UserRepository userRepository;
@@ -29,7 +30,7 @@ public class UserServiceImpl  implements UserService{
         return userRepository.findAll();
 
     }
-
+    @Transactional
     public void saveUser(User user) {
 
         userRepository.save(user);
@@ -37,13 +38,13 @@ public class UserServiceImpl  implements UserService{
     }
 
 
-
+    @Transactional
     public void update(Long id, User updateUser) {
 
         updateUser.setId(id);
         userRepository.save(updateUser);
     }
-
+    @Transactional
     public void deleteUser(User user) {
 
         userRepository.delete(user);
