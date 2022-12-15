@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+
 public class UserServiceImpl  implements UserService{
 
     private final UserRepository userRepository;
@@ -30,7 +30,7 @@ public class UserServiceImpl  implements UserService{
         return userRepository.findAll();
 
     }
-    @Transactional
+@Transactional
     public void saveUser(User user) {
 
         userRepository.save(user);
@@ -38,13 +38,13 @@ public class UserServiceImpl  implements UserService{
     }
 
 
-    @Transactional
+@Transactional
     public void update(Long id, User updateUser) {
 
         updateUser.setId(id);
         userRepository.save(updateUser);
     }
-    @Transactional
+  @Transactional
     public void deleteUser(User user) {
 
         userRepository.delete(user);
