@@ -23,8 +23,9 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     //Настройка для входа в систему
                     .formLogin().permitAll()
                     .loginPage("/login")
+                    .successHandler(successHandler)
                     
-                .and()
+                 .and()
                     .logout()
                     .permitAll()
                     .logoutSuccessUrl("/login");
