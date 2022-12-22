@@ -6,12 +6,17 @@
 	</head>
 	<body>
 	<form action="#" th:action="@{/new}" th:object="${user}" method="post">
+
+<label for=”id”>ID</label>
+<input type="text" th:field="*{id}" id="id" placeholder="id" readonly >
+<br>
+<br>
 	<label for="name">Name</label>
 	<input type="text" th:field="*{name}" id="name" placeholder="name">
 	<br>
 	<br>
-	<label for="lastname">Lastname</label>
-	<input type="text" th:field="*{lastname}" id="lastname" placeholder="lastname">
+	<label for="lastName">Lastname</label>
+	<input type="text" th:field="*{lastName}" id="lastName" placeholder="lastName">
 	<br>
 	<br>
 	<label for="email">Email</label>
@@ -20,24 +25,25 @@
 	<label for="age">Age</label>
 	<input type="text" th:field="*{age}" id="age" placeholder="age">
 	<br>
-<br>
+	<br>
 	<label for="password">Password</label>
 	<input type="text" th:field="*{ password }" id=" password " placeholder=" password ">
 	<br>
-<br>
+	<br>
 	<label for="role">P</label>
 	<select required size = "2" name = "role[]">
-        <option value = "ROLE_USER">ROLE_USER</option>
-        <option value = "ROLE_Admin">ROLE_Admin</option>
-    </select>
-
-
-<br>
-<br>
-<input type="submit" value="Create user">
+	<option value = "ROLE_USER">ROLE_USER</option>
+	<option value = "ROLE_Admin">ROLE_Admin</option>
+	</select>
+	
+	
+	<br>
+	<br>
+	<input type="submit" value="Create user">
 	</form>
 	</body>
 	</html>
+
 	
 	
 	
