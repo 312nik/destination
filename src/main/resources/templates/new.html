@@ -25,11 +25,11 @@
 	<input type="text" th:field="*{ password }" id=" password " placeholder=" password ">
 	<br>
 <br>
-	<label for="role">Role</label>
-	<select multiple required size = "2" name = "role[]">
-        <option value = "ROLE_USER">ROLE_USER</option>
-        <option value = "ROLE_Admin">ROLE_Admin</option>
-    </select>
+	<label>
+        <select multiple size="2" th:name="roles" th:field="*{roles}">
+            <option th:each="role : ${roles}" th:value="${role}" th:text="${role}"></option>
+        </select>
+    </label>
 
 
 <br>
