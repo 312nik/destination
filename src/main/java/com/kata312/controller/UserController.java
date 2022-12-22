@@ -15,11 +15,13 @@ import java.util.List;
 public class UserController {
 
     private final UserServiceImpl userService;
+      private final RoleServiceImpl roleService;
 
     @Autowired
-    public UserController(UserServiceImpl userService) {
+    public UserController(UserServiceImpl userService,RoleServiceImpl roleService) {
 
         this.userService = userService;
+        this.roleService = roleService;
     }
 
     @GetMapping("/")
@@ -49,6 +51,17 @@ public class UserController {
         return "redirect:/users";
 
     }
+    
+    
+   @PostMapping("/new")
+public String createUser(@ModelAttribute User user,@RequestParam String[] roles) {
+
+    
+    userService.saveUser(user);
+  
+
+    return "/users";
+}
 
     @PostMapping("/delete/{id}")
     public String deleteUser(@PathVariable("id") Long id, Model model) {
