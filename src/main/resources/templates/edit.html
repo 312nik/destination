@@ -1,25 +1,47 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Update</title>
-</head>
-<body>
-<form action="#"  th:action="@{/edit}" th:object="${user}" th:method="post">
-    <input type="hidden" th:field="*{id}" id="id">
-    <label for="name">Name</label>
-    <input type="text" th:field="*{name}" id="name" placeholder="name">
-    <br>
-    <br>
-    <label for="lastname">Lastname</label>
-    <input type="text" th:field="${user.lastname}" id="lastname" placeholder="lastname" >
-    <br>
-    <br>
-    <label for="email">Email</label>
-    <input type="text" th:field="${user.email}" id="email" placeholder="email">
-    <br>
-    <br>
-    <input type="submit" value="Update user">
-</form>
-</body>
-</html>
+	<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<meta charset="UTF-8">
+	<title>Create user</title>
+	</head>
+	<body>
+	<form action="#" th:action="@{/new}" th:object="${user}" method="post">
+	<label for="name">Name</label>
+	<input type="text" th:field="*{name}" id="name" placeholder="name">
+	<br>
+	<br>
+	<label for="lastname">Lastname</label>
+	<input type="text" th:field="*{lastname}" id="lastname" placeholder="lastname">
+	<br>
+	<br>
+	<label for="email">Email</label>
+	<input type="text" th:field="*{email}" id="email" placeholder="email">
+	<br>
+	<label for="age">Age</label>
+	<input type="text" th:field="*{age}" id="age" placeholder="age">
+	<br>
+<br>
+	<label for="password">Password</label>
+	<input type="text" th:field="*{ password }" id=" password " placeholder=" password ">
+	<br>
+<br>
+	<label for="role">P</label>
+	<select required size = "2" name = "role[]">
+        <option value = "ROLE_USER">ROLE_USER</option>
+        <option value = "ROLE_Admin">ROLE_Admin</option>
+    </select>
+
+
+<br>
+<br>
+<input type="submit" value="Create user">
+	</form>
+	</body>
+	</html>
+	
+	
+	
+	
+
+
+
