@@ -1,0 +1,21 @@
+@Controller
+
+public class LoginController {
+
+    private final UserServiceImpl userService;
+     
+    @Autowired
+    public UserController(UserServiceImpl userService) {
+
+        this.userService = userService;
+      
+    }
+
+    @GetMapping("/login")
+    public String userLogin(Model model, String error, String logout) {
+        if (error !=null) {
+        model.addAttribute("error", "Email or  password is  incorrect.")}
+       
+        return "login";
+    }
+}
