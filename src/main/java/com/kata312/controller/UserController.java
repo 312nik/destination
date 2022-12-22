@@ -44,13 +44,7 @@ public class UserController {
         return "/new";
     }
 
-    @PostMapping("/new")
-    public String createUser(User user) {
-
-        userService.saveUser(user);
-        return "redirect:/users";
-
-    }
+    
     
     
    @PostMapping("/new")
@@ -73,7 +67,7 @@ public String createUser(@ModelAttribute User user,@RequestParam String[] roles)
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable("id") Long id, Model model) {
-
+         
         User user = userService.findById(id);
         model.addAttribute("user", user);
         return "/edit";
@@ -87,6 +81,16 @@ public String createUser(@ModelAttribute User user,@RequestParam String[] roles)
         return "redirect:/users";
 
     }
+    
+      
+   @PostMapping("/edit")
+public String updateUser(@ModelAttribute User user,@RequestParam String[] roles) {
+
+    
+    userService.saveUser(user);
+  
+
+    return "/users";
 
 }
 
