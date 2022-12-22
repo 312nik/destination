@@ -21,7 +21,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
           
                 .and()
                     //Настройка для входа в систему
-                    .formLogin()
+                    .formLogin().permitAll()
                     .loginPage("/login")
                     
                 .and()
