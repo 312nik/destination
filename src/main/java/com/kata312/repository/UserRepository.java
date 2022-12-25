@@ -2,11 +2,12 @@ package com.kata312.repository;
 
 import com.kata312.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-public interface UserRepository extends JpaRepository<User,Long> {
-  
-  @EntityGraph(attribuParth="roles")
-  
-  User findUsersByEmail(String email);
+
+@Repository
+public interface UserRepository extends JpaRepository <User,Long> {
+    User findUsersByEmail(String email);
+
 
 }
