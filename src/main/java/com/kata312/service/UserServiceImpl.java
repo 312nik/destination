@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 
-public class UserServiceImpl  implements UserService, UserDetailsService {
+public class UserServiceImpl  implements UserService {
 
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -62,13 +62,4 @@ public class UserServiceImpl  implements UserService, UserDetailsService {
     }
 
 
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user= userRepository.findUsersByEmail(email);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-
-        return user;
-    }
 }

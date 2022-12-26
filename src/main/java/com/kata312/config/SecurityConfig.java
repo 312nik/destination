@@ -15,9 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 @Autowired
-    UserServiceImpl userServiceImpl;
+    UserDetailsServiceImpl userDetailsService;
 @Autowired
     SuccessUserHandler successUserHandler;
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
@@ -36,11 +37,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //Настройка для входа в систему
                 .formLogin()
-                /*.loginPage("/login")
+                .loginPage("/login")
                 .usernameParameter("username")
                 .passwordParameter("password")
                 // даем доступ к форме логина всем
-                .permitAll()*/
+                .permitAll()
                 .successHandler(successUserHandler)
                 .and()
                 .logout()
@@ -50,7 +51,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userServiceImpl).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
 }
