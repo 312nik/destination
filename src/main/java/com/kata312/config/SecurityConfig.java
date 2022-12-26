@@ -14,22 +14,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
-
- private final UserServiceImpl userServiceImpl;
-
-
-    private final SuccessUserHandler successUserHandler;
 @Autowired
-    public SecurityConfig(UserServiceImpl userServiceImpl, SuccessUserHandler successUserHandler) {
-        this.userServiceImpl = userServiceImpl;
-
-        this.successUserHandler = successUserHandler;
-    }
-
+    UserServiceImpl userServiceImpl;
+@Autowired
+    SuccessUserHandler successUserHandler;
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
+
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
@@ -42,9 +36,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //Настройка для входа в систему
                 .formLogin()
-                .loginPage("/login")
-                //Перенарпавление на главную страницу после успешного входа
-                .defaultSuccessUrl("/")
+                /*.loginPage("/login")
+                .usernameParameter("username")
+                .passwordParameter("password")
+                // даем доступ к форме логина всем
+                .permitAll()*/
                 .successHandler(successUserHandler)
                 .and()
                 .logout()

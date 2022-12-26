@@ -1,7 +1,6 @@
 package com.kata312.service;
 
 import com.kata312.model.User;
-import com.kata312.repository.RoleRepository;
 import com.kata312.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -18,13 +17,14 @@ import java.util.List;
 public class UserServiceImpl  implements UserService, UserDetailsService {
 
     private final UserRepository userRepository;
-    private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bcryptPasswordEncoder;
     @Autowired
-    public UserServiceImpl(UserRepository userRepository,RoleRepository roleRepository,BCryptPasswordEncoder bcryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bcryptPasswordEncoder) {
         this.userRepository = userRepository;
-         this.roleRepository = roleRepository;
         this.bcryptPasswordEncoder = bcryptPasswordEncoder;
+
+
+
         
     }
 

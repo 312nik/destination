@@ -132,7 +132,5 @@ public class User  implements UserDetails {
     }
 
 
-    public void addNewRole(Role role) {
-        roles.add(role);
-    }
+
 }
