@@ -4,12 +4,16 @@ import com.kata312.model.Role;
 import com.kata312.model.User;
 import com.kata312.service.RoleServiceImpl;
 import com.kata312.service.UserServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
@@ -21,6 +25,7 @@ public class AdminController {
 
     private final UserServiceImpl userService;
     private final RoleServiceImpl roleService;
+
     @Autowired
     public AdminController(UserServiceImpl userService, RoleServiceImpl roleService) {
 
@@ -28,6 +33,8 @@ public class AdminController {
         this.roleService = roleService;
 
     }
+
+
 
     @GetMapping("/admin/users")
     public String showAllUsers(Model model, Principal principal) {
@@ -53,7 +60,17 @@ public class AdminController {
     }
 
     @PostMapping("admin/new")
-    public String createUser(@ModelAttribute("user") User user,@RequestParam(value = "selectRoles") String[] selectRole) {
+    public String createUser(@ModelAttribute("user") @Valid User user, @RequestParam(value = "selectRoles") String[] selectRole,
+                             BindingResult bindingResult, Model model) {
+
+        if ( userService.findUserByEmail(user.getEmail()) != null) {
+        model.addAttribute("emailError", "Пользователь с таким именем уже существует");
+            List <Role> roles= roleService.getAllRole();
+            model.addAttribute("roles",roles);
+
+
+        return "/admin/new";
+    }
         Set <Role> roles =  new HashSet<>();
         for (String role: selectRole ) {
            roles.add(roleService.getRoleByName(role));

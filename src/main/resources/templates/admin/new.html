@@ -22,6 +22,8 @@
     <br>
     <label for="email">Email</label>
     <input type="text" th:field="*{email}" id="email" placeholder="Email">
+    <p th:text="${emailError}" ></p>
+
     <br>
     <br>
     <label for="password" >Password</label>
@@ -39,6 +41,8 @@
     </label>
 
     <br><br>
+
+
 <input type="submit" value="Create user">
 </form>
 </body>

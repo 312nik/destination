@@ -37,16 +37,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //Настройка для входа в систему
                 .formLogin()
-               /* .loginPage("/login")
-                .usernameParameter("username")
-                .passwordParameter("password")*/
                 // даем доступ к форме логина всем
                 .permitAll()
                 .successHandler(successUserHandler)
                 .and()
                 .logout()
                 .permitAll()
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/login");
     }
 
     @Autowired
