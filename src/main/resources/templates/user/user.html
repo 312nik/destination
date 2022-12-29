@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<p th:text="${userPrincipal.email} +' with roles: '+ ${rolesString}"></p>
+<table border="1" cellpadding="5">
+    <thead>
+    <tr>
+
+        <th>Name</th>
+        <th>Lastname</th>
+        <th>Email</th>
+        <th>Age</th>
+        <th>Role</th>
+
+    </tr>
+    </thead>
+    <tbody>
+        <td th:text="${userPrincipal.name}">Name</td>
+        <td th:text="${userPrincipal.lastName}">Lastname</td>
+        <td th:text="${userPrincipal.email}">Email</td>
+        <td th:text="${userPrincipal.age}">Age</td>
+        <td th:text="${rolesString}">Roles</td>
+
+
+
+
+    </tbody>
+</table>
+<p><a href="/logout">Logout</a></p>
+</body>
+</html>

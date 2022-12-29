@@ -8,9 +8,9 @@
 </head>
 <body>
 <div>
+   <br><br>
+    <p th:text="${userPrincipal.email} +' with roles: '+ ${rolesString}"></p>
 
-    <p><a href="/logout">Logout</a></p>
-    <h2>User< /h2>
     <br><br>
 
 
@@ -24,7 +24,7 @@
             <th>Email</th>
             <th>Age</th>
             <th>Role</th>
-            <th colspan="2>Options</th>
+            <th colspan="2">Options</th>
         </tr>
         </thead>
         <tbody>
@@ -36,11 +36,13 @@
             <td th:text="${user.roles}">Age</td>
 
             <td >
-                <form th:method="get"  th:action="@{/edit/{id}(id=${user.id})}">
+                <form th:method="get"  th:action="@{/admin/edit/{id}(id=${user.id})}">
                     <button type="submit">Update</button>
                 </form>
-                <br>
-                <form th:method="post" th:action="@{/delete/{id}(id=${user.id})}">
+            </td>
+            <td>
+
+                <form th:method="post" th:action="@{/admin/delete/{id}(id=${user.id})}">
                     <input type="submit" value="Delete">
                 </form>
             </td>
@@ -49,9 +51,14 @@
         </tbody>
     </table>
 </div>
-<p><a href="/new">Create user</a></p>
+<p><a href="/admin/new">Create user</a></p>
 
-<p><a href="/user">User</a></p>
+
+
+<p><a href="/user/user">User</a></p>
+
+
+<p><a href="/logout">Logout</a></p>
 
 
 </body>

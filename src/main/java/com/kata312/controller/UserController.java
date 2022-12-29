@@ -9,28 +9,36 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.security.Principal;
 import java.util.List;
 
 @Controller
-@RequestMapping("/user")
+
 public class UserController {
     private final UserServiceImpl userService;
-    private final RoleServiceImpl roleService;
+
     @Autowired
-    public UserController(UserServiceImpl userService, RoleServiceImpl roleService) {
+    public UserController(UserServiceImpl userService) {
 
         this.userService = userService;
-        this.roleService = roleService;
+
 
     }
 
 
 
-    @GetMapping("/")
-    public String showUsers(Model model) {
-       /* User user = userService.findById(Long id);*/
-        /*model.addAttribute("user", user);*/
-        return "/user";
+
+
+
+    @GetMapping("/user/user")
+    public String showPrincipal(Model model, Principal principal) {
+       String userMail = principal.getName();
+       User user= userService.findUserByEmail(userMail);
+       String rolesString= userService.getRolesToString(user);
+       model.addAttribute("rolesString", rolesString);
+       model.addAttribute("userPrincipal",user);
+
+       return "/user/user";
     }
 
 }

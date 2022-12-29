@@ -15,6 +15,11 @@ public interface UserService {
     void update(Long id, User updateUser);
 
     void deleteUser(User user);
+    User findUserByEmail(String email);
+
+    String getRolesToString(User user);
+
+
 }
 
 

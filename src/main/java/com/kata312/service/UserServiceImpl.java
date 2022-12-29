@@ -1,16 +1,15 @@
 package com.kata312.service;
 
+import com.kata312.model.Role;
 import com.kata312.model.User;
 import com.kata312.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 
@@ -41,8 +40,8 @@ public class UserServiceImpl  implements UserService {
     }
     @Transactional
     public void saveUser(User user) {
-        user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
 
+        user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
 
     }
@@ -59,6 +58,22 @@ public class UserServiceImpl  implements UserService {
 
         userRepository.delete(user);
 
+    }
+
+    @Override
+    public User findUserByEmail(String email) {
+        return userRepository.findUserByEmail(email);
+    }
+
+    @Override
+    public String getRolesToString(User user) {
+        Set<Role> roles=user.getRoles();
+        String getRoles = null;
+        for (Role role:roles) {
+            getRoles=(role.toString().substring(5)+" ");
+        }
+        assert getRoles != null;
+        return  getRoles.trim();
     }
 
 

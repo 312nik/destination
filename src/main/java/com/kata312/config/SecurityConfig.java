@@ -37,9 +37,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 //Настройка для входа в систему
                 .formLogin()
-                .loginPage("/login")
+               /* .loginPage("/login")
                 .usernameParameter("username")
-                .passwordParameter("password")
+                .passwordParameter("password")*/
                 // даем доступ к форме логина всем
                 .permitAll()
                 .successHandler(successUserHandler)
