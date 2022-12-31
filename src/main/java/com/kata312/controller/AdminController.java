@@ -10,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -44,16 +43,19 @@ public class AdminController {
 
         List<User> users = userService.findAll();
         model.addAttribute("users", users);
-        return "/admin/users";
+        return "/users";
+
+
+
     }
 
 
     @GetMapping("admin/new")
     public String createUserForm(User user,Model model) {
-        user = new User();
+
         List <Role> roles= roleService.getAllRole();
         model.addAttribute("roles",roles);
-        model.addAttribute("user",user);
+
         return "admin/new";
     }
 

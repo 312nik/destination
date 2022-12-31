@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
-    <title>User page</title>
+    <title>Admin page</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous"/>
     <link  rel="stylesheet"  href="style.css"/>
@@ -120,8 +120,57 @@
                     <!--NEWUSER-->
 
 
+                    <div class="container-fluid">
 
-                    dfgdfgdfg
+                        <div class="card ">
+
+
+                            <div class="card-header">
+                                <h4> Add new user</h4>
+
+                            </div>
+
+                            <div class="card-body blank-3">
+
+                                <form role="form">
+                                    <div class="form-group">
+                                        <label for="name">First Name</label>
+                                        <input type="text" class="form-control" id="name" placeholder="First name">
+
+                                        <label for="lastname">Last Name</label>
+                                        <input type="text" class="form-control" id="lastname" placeholder="Last name">
+
+                                        <label for="age">Age</label>
+                                        <input type="text" class="form-control" id="age" placeholder="FAge">
+
+
+
+                                        <label for="email">First Name</label>
+                                        <input type="email" class="form-control" id="email" placeholder="Email">
+
+                                        <label for="password">First Name</label>
+                                        <input type="password" class="form-control" id="password" placeholder="Password">
+
+
+                                        <label for="role" class="com-form-label">Role:</label>
+                                        <select multiple id="role" class="form-control select" size="2">
+                                            <option value="ROLE_ADMIN">USER</option>
+                                            <option value="ROLE_USER">ADMIN</option>
+                                        </select>
+                                    </div>
+                                </form>
+
+                                <button type="button" class="btn btn-success">Add new user</button>
+
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
 
 
 
@@ -211,9 +260,8 @@
             </div>
         </div>
 
-    </div>
-
 </div>
+
 
 </body>
 

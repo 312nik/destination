@@ -19,9 +19,9 @@
     </ul>
 </nav>
 
-<div class="d-flex  my-3 align-items-start">
-    <div class="nav-vertical  col-2 flex-column nav-pills  bg-white" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active   " id="v-pills-user-tab" data-bs-toggle="pill" href="#v-pills-user"
+<div class="d-flex  my-3 g-0 align-items-start">
+    <div class="nav-vertical   g-0 col-2 flex-column nav-pills  bg-white fs-5   py-1 " id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active fs-5 py-1   " id="v-pills-user-tab" data-bs-toggle="pill" href="#v-pills-user"
            role="tab" aria-controls="v-pills-user">User</a>
 
 
@@ -56,10 +56,10 @@
                                 <td th:text="${userPrincipal.lastName}">user</td>
                                 <td th:text="${userPrincipal.age}">user</td>
                                 <td th:text="${userPrincipal.email}">user</td>
-                                <td th:text="${rolesString}">user</td>
+                                <td th:text="${userPrincipal.getRoleToString}">user</td>
                             </tr>
 
-                            </table>>
+                            </table>
                         </div>
 
                 </div>
