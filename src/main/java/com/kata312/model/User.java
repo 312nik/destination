@@ -132,5 +132,15 @@ public class User  implements UserDetails {
     }
 
 
+    public String getRoleToString(){
+        Set<Role> roles=getRoles();
+        String getRoles=" ";
+        for (Role role:roles) {
+            getRoles= getRoles+(role.toString().substring(5)+" ");
+        }
+        assert getRoles != null;
+        return  getRoles.trim();
+
+    }
 
 }

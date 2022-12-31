@@ -40,8 +40,6 @@ public class AdminController {
     public String showAllUsers(Model model, Principal principal) {
         String userMail = principal.getName();
         User user= userService.findUserByEmail(userMail);
-        String rolesString= userService.getRolesToString(user);
-        model.addAttribute("rolesString", rolesString);
         model.addAttribute("userPrincipal",user);
 
         List<User> users = userService.findAll();
