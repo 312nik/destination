@@ -6,80 +6,82 @@
           integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
     <link  rel="stylesheet"  href="style.css"/>
 </head>
-<body>
-<nav class="navbar navbar-expand-lg  bg-dark justify-content-between align-bottom px-2">
-    <div class="nav  text-white  fs-5 ">
+<body  class="bg-light ">
+<nav class="navbar   fs-4 bg-dark justify-content-between align-bottom px-4">
+    <div class="nav  text-white  me-1 d-inline-block  text-left">
 
-        <span class="bold  text-left" th:text="${userPrincipal.email}"></span>
-           <span class="lead  text-left" th:text="'with roles:  '"></span>
+        <span class="fw-bold   " th:text="${userPrincipal.email}"></span>
+        <span class="lead">with roles:</span>
            <th:block th:each="role : ${userPrincipal.roles}">
-               <span class="lead  text-left" th:utext="${#strings.substring(role.name,5)}"></span>
+               <span class="lead" th:utext="${#strings.substring(role.name,5)}"></span>
            </th:block>
     </div>
 
-    <a class="nav-link text-secondary align-bottom " th:href="@{'/logout'}" >Logout</a>
+    <a class="nav-link text-secondary fs-5 align-bottom " th:href="@{'/logout'}" >Logout</a>
 
 </nav>
 
 
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2">
+
+            <div class="nav-vertical  flex-column nav-pills  my-3 bg-white">
+            <div class="flex-column nav-pills   " id="v-pills-tab" role="tablist" aria-orientation="vertical" >
+                <a class="nav-link  fs-6 py-2 px-3 active">User</a>
+            </div>
+        </div>
+        </div>
+        <div class="col-md-10">
 
 
+            <div class="container-fluid bg-light  g-0">
+                <p class="fs-1">User information-page</p>
+                <div class="card" >
+                    <div class="card-header  fs-6">
+                        About user
+                    </div>
+                    <div class="card-body">
+                        <table class="table table-striped">
+                            <thead>
+                            <tr>
 
+                                <th scope="col">ID</th>
+                                <th scope="col">First name</th>
+                                <th scope="col">Last name</th>
+                                <th scope="col">Age</th>
+                                <th scope="col">Email</th>
+                                <th scope="col">Role</th>
 
-
-
-
-<!--<div class="container-fluid">
-
-    <div class="row my-3 ">
-
-    <div class="nav-vertical  col-2 flex-column nav-pills  bg-white" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-        <a class="nav-link active" id="v-pills-user-tab" data-bs-toggle="pill" href="#v-pills-user"
-           role="tab" aria-controls="v-pills-user">User</a>
-
-
-
-    </div>
-    <div class="tab-content col-10" id="v-pills-tabContent">
-    </div>
-        <div class="container-fluid bg-light px-4 py-3 g-0">
-            <h1>User information-page</h1>
-            <div class="card">
-                <div class="card-header py-3">
-                    <div class="h4 m-0">About user</div>
-                </div>
-                <div class="card-body">
-                    <table class="table table-striped border-top">
-                        <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th >First Name</th>
-                            <th >Last Name</th>
-                            <th >Age</th>
-                            <th >Email</th>
-                            <th >Role</th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        <tr>
-                            <td th:text="${userPrincipal.id}"></td>
-                            <td th:text="${userPrincipal.name}"></td>
-                            <td th:text="${userPrincipal.lastName}"></td>
-                            <td th:text="${userPrincipal.age}"></td>
-                            <td th:text="${userPrincipal.username}"></td>
-                            <td>
-                                <th:block th:each="role : ${userPrincipal.roles}">
-                                    <span th:utext="${#strings.substring(role.name,5)}"></span>
-                                </th:block>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td th:text="${userPrincipal.id}"></td>
+                                <td th:text="${userPrincipal.name}"></td>
+                                <td th:text="${userPrincipal.lastName}"></td>
+                                <td th:text="${userPrincipal.age}"></td>
+                                <td th:text="${userPrincipal.username}"></td>
+                                <td>
+                                    <th:block th:each="role : ${userPrincipal.roles}">
+                                        <span th:utext="${#strings.substring(role.name,5)}"></span>
+                                    </th:block>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-</div>-->
+</div>
+</body>
+
+
+
+
+
 
 
 
