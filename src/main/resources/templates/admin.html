@@ -100,7 +100,7 @@
                     <td th:text="${user.age}"></td>
                     <td th:text="${user.email}"></td>
                     <td>
-                      <th:block th:each="role : ${userPrincipal.roles}">
+                      <th:block th:each="role : ${user.roles}">
                         <span th:utext="${#strings.substring(role.name,5)}"></span>
                       </th:block>
                     </td>
@@ -110,7 +110,7 @@
                                th:data-bs-target="${'#editModal'+user.id}">Edit</button>
 
                     </td>
-                    EDIT MODAL
+              <!--      EDIT MODAL-->
                     <div id="editModal" class="modal fade" >
                       <div class="modal-dialog">
                         <div class="modal-content">
@@ -183,11 +183,13 @@
                       <input th:field="*{password}" type="password" class="form-control" id="password" placeholder="Password">
 
 
-                      <label  for="role" class="com-form-label fw-bold">Role</label>
-                      <select  multiple  required id="role" class="form-control select" size="2" >
-                        <option value="ROLE_ADMIN">USER</option>
-                        <option value="ROLE_USER">ADMIN</option>
+                      <label  for="roles" class="com-form-label fw-bold">Role</label>
+                      <select name="roles" size="2" multiple required class="form-select mx-auto"   id="roles">
+                        <option value="1">ADMIN</option>
+                        <option value="2">USER</option>
                       </select>
+
+
 
                     </div>
 
@@ -241,14 +243,14 @@
                   <tbody>
 
 
-                  <tr th:each="user:${users}">
-                    <td th:text="${user.id}"></td>
-                    <td th:text="${user.name}"></td>
-                    <td th:text="${user.lastName}"></td>
-                    <td th:text="${user.age}"></td>
-                    <td th:text="${user.email}"></td>
+                  <tr>
+                    <td th:text="${userPrincipal.id}"></td>
+                    <td th:text="${userPrincipal.name}"></td>
+                    <td th:text="${userPrincipal.lastName}"></td>
+                    <td th:text="${userPrincipal.age}"></td>
+                    <td th:text="${userPrincipal.email}"></td>
                     <td>
-                      <th:block th:each="role : ${user.roles}">
+                      <th:block th:each="role : ${userPrincipal.roles}">
                         <span th:utext="${#strings.substring(role.name,5)}"></span>
                       </th:block>
                     </td>
