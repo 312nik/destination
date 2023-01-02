@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 @Service
@@ -21,10 +22,6 @@ public class UserServiceImpl  implements UserService {
     public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bcryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.bcryptPasswordEncoder = bcryptPasswordEncoder;
-
-
-
-        
     }
 
     public User findById(Long id) {
@@ -41,8 +38,10 @@ public class UserServiceImpl  implements UserService {
     @Transactional
     public void saveUser(User user) {
 
+        User userNew= userRepository.findUserByEmail(user.getEmail());
+        if (userNew==null){
         user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);
+        userRepository.save(user);}
 
     }
 
@@ -62,11 +61,14 @@ public class UserServiceImpl  implements UserService {
 
     @Override
     public User findUserByEmail(String email) {
+
         return userRepository.findUserByEmail(email);
+
     }
 
     @Override
     public String getRolesToString(User user) {
+
         Set<Role> roles=user.getRoles();
         String getRoles = null;
         for (Role role:roles) {
@@ -75,6 +77,4 @@ public class UserServiceImpl  implements UserService {
         assert getRoles != null;
         return  getRoles.trim();
     }
-
-
 }

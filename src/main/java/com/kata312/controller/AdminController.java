@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -35,49 +36,44 @@ public class AdminController {
 
 
 
-    @GetMapping("/admin/users")
+    @GetMapping("/admin")
     public String showAllUsers(Model model, Principal principal) {
         String userMail = principal.getName();
         User user= userService.findUserByEmail(userMail);
-        model.addAttribute("userPrincipal",user);
-
         List<User> users = userService.findAll();
+        User newUser=new User();
+        model.addAttribute("userPrincipal",user);
         model.addAttribute("users", users);
-        return "/users";
+        model.addAttribute("newUser",newUser);
+        return "/admin";
 
 
 
     }
 
 
-    @GetMapping("admin/new")
+   /* @GetMapping("admin/new")
     public String createUserForm(User user,Model model) {
 
         List <Role> roles= roleService.getAllRole();
         model.addAttribute("roles",roles);
 
         return "admin/new";
-    }
+    }*/
 
     @PostMapping("admin/new")
-    public String createUser(@ModelAttribute("user") @Valid User user, @RequestParam(value = "selectRoles") String[] selectRole,
-                             BindingResult bindingResult, Model model) {
+    public String createUser(@ModelAttribute("newUser")  User user, RedirectAttributes redirectAttributes) {
+        User userNew= userService.findUserByEmail(user.getEmail());
 
-        if ( userService.findUserByEmail(user.getEmail()) != null) {
-        model.addAttribute("emailError", "Пользователь с таким именем уже существует");
-            List <Role> roles= roleService.getAllRole();
-            model.addAttribute("roles",roles);
-
-
-        return "/admin/new";
-    }
-        Set <Role> roles =  new HashSet<>();
-        for (String role: selectRole ) {
-           roles.add(roleService.getRoleByName(role));
+        if (userNew !=null){
+            redirectAttributes.addFlashAttribute("message",
+                    "A user with such an email already exists!");
         }
-        user.setRoles(roles);
+
+
+
     userService.saveUser(user);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
 
     }
 

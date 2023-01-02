@@ -24,9 +24,9 @@
 
 <div class="container-fluid">
     <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 ">
 
-            <div class="nav-vertical  flex-column nav-pills  my-3 bg-white">
+            <div class="nav-vertical  flex-column nav-pills  my-3 bg-white " style="height:1250px;">
             <div class="flex-column nav-pills   " id="v-pills-tab" role="tablist" aria-orientation="vertical" >
                 <a class="nav-link  fs-6 py-2 px-3 active">User</a>
             </div>
@@ -61,7 +61,7 @@
                                 <td th:text="${userPrincipal.name}"></td>
                                 <td th:text="${userPrincipal.lastName}"></td>
                                 <td th:text="${userPrincipal.age}"></td>
-                                <td th:text="${userPrincipal.username}"></td>
+                                <td th:text="${userPrincipal.email}"></td>
                                 <td>
                                     <th:block th:each="role : ${userPrincipal.roles}">
                                         <span th:utext="${#strings.substring(role.name,5)}"></span>

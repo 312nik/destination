@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <title>Admin page</title>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+  <link  rel="stylesheet"  href="style.css"/>
+</head>
+<body  class="bg-light ">
+<nav class="navbar   fs-4 bg-dark justify-content-between align-bottom px-4">
+  <div class="nav  text-white  me-1 d-inline-block  text-left">
+    <span class="fw-bold   " th:text="${userPrincipal.email}"></span>
+    <span class="lead">with roles:</span>
+    <th:block th:each="role : ${userPrincipal.roles}">
+      <span class="lead" th:utext="${#strings.substring(role.name,5)}"></span>
+    </th:block>
+  </div>
+  <a class="nav-link text-secondary fs-6 align-bottom " th:href="@{'/logout'}" >Logout</a>
+</nav>
+
+
+<div class="container-fluid">
+<!--  ERORE MASSAGE if email isExsist-->
+  <div th:if="${message != null}" class="alert alert-success fade show text-center message"
+       role="alert">
+    [[${message}]]
+    <button type="button" class="close btn-sm" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+
+
+
+
+ <!-- ERORE MASSAGE-->
+  <div class="row">
+    <div class="col-md-2">
+
+
+      <!--Vertical  pills ADMIN USER-->
+      <div class="nav-vertical  flex-column nav-pills  my-3 bg-white" style="height: 1050px;">
+        <div class="nav flex-column nav-pills " id="v-pills-tab" role="tablist" aria-orientation="vertical">
+          <a class="nav-link  fs-6 py-2 px-3 active " id="v-pills-admin-tab" data-bs-toggle="pill"
+             href="#v-pills-admin" role="tab" aria-controls="v-pills-admin" aria-selected="true">Admin</a>
+          <a class="nav-link fs-6 py-2 px-3 " id="v-pills-user-tab" data-bs-toggle="pill"
+             href="#v-pills-user" role="tab" aria-controls="v-pills-user" aria-selected="false">User</a>
+        </div>
+      </div>
+    </div>
+    <!-- END Vertical  pills ADMIN USER-->
+
+
+
+    <div class="col-md-10 g-0 ">
+
+      <!--Tabs ADMIN+USER-->
+      <div class="tab-content" id="v-pills-tabContent">
+<!--        ADMIN panel-->
+        <div class="tab-pane fade show active" id="v-pills-admin"
+             role="tabpanel" aria-labelledby="v-pills-admin-tab">
+
+          <nav class="nav nav-tabs g-0" id="nav-tab" role="tablist">
+            <a class="nav-link active g-0" id="nav-user-table-tab" data-bs-toggle="tab"
+               href="#nav-user-table" role="tab" aria-controls="nav-user-table" aria-selected="true">Users table</a>
+            <a class="nav-link g-0" id="nav-new-user-tab" data-bs-toggle="tab"
+               href="#nav-new-user" role="tab" aria-controls="nav-new-user" aria-selected="false">New User</a>
+
+          </nav>
+          <div class="tab-content g-0" id="nav-tabContent">
+            <div class="tab-pane fade show active" id="nav-user-table" role="tabpanel"
+                 aria-labelledby="nav-user-table-tab">
+         <!--     USERs TABLE-->
+
+
+              <div class="card g-0">
+                <div class="card-header fs-5">All users</div>
+                <!--                  USERS TABLE -->
+
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+
+                    <th scope="col">ID</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+                    <th scope="col">Edit</th>
+                    <th scope="col">Delete</th>
+
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <tr th:each="user:${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.age}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td>
+                      <th:block th:each="role : ${userPrincipal.roles}">
+                        <span th:utext="${#strings.substring(role.name,5)}"></span>
+                      </th:block>
+                    </td>
+                    <td >
+
+                      <button  class="btn btn-info" data-bs-toggle="modal" data-bs-target="modal"
+                               th:data-bs-target="${'#editModal'+user.id}">Edit</button>
+
+                    </td>
+                    EDIT MODAL
+                    <div id="editModal" class="modal fade" >
+                      <div class="modal-dialog">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <button class="close" data-dismiss="modal">X</button><
+                            <div class="modal-title">Edit user</div>
+                          </div>
+                          <div class="modal-body">
+
+
+
+
+
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- END EDIT MODAL-->
+                      <td>
+                        <button type="button" class="btn btn-danger">Delete</button>
+
+                        <!-- <form th:method="post" th:action="@{/admin/delete/{id}(id=${user.id})}">
+                             <input type="submit" value="Delete">
+                         </form>-->
+                      </td>
+                      <!--DELETE MODAL-->
+
+
+
+
+
+
+
+
+                     <!-- END DELETE MODAL-->
+                    </tr>
+                    </tbody>
+                  </table>
+           <!--       END USERS TABLE-->
+                </div>
+              </div>
+      <!--        END USERs TABLE-->
+            </div>
+            <div class="tab-pane fade" id="nav-new-user" role="tabpanel"
+                 aria-labelledby="nav-new-user-tab">
+            <!--  NEW USER-->
+
+              <div class="card">
+                <div class="card-header fs-5">Add new user</div>
+                <div class="card-body  text-center">
+                 <!-- FORM NEW USER-->
+
+                  <form  th:method="POST" th:action="@{/admin/new}" th:object="${newUser}">
+                    <div class="form-group  mx-auto text-centre w-25 ">
+                      <label class="fw-bold" for="name">First Name</label>
+                      <input th:field="*{name}" type="text" class="form-control" id="name" placeholder="First name">
+
+                      <label class="fw-bold" for="lastname">Last Name</label>
+                      <input th:field="*{lastName}" type="text" class="form-control" id="lastname" placeholder="Last name">
+
+                      <label class="fw-bold" for="age">Age</label>
+                      <input th:field="*{age}"  type="number" class="form-control" id="age" placeholder="Age">
+
+                      <label  class="fw-bold" for="email">Email</label>
+                      <input th:field="*{email}" type="email" class="form-control" id="email" placeholder="Email">
+
+                      <label class="fw-bold" for="password">Password</label>
+                      <input th:field="*{password}" type="password" class="form-control" id="password" placeholder="Password">
+
+
+                      <label  for="role" class="com-form-label fw-bold">Role</label>
+                      <select  multiple  required id="role" class="form-control select" size="2" >
+                        <option value="ROLE_ADMIN">USER</option>
+                        <option value="ROLE_USER">ADMIN</option>
+                      </select>
+
+                    </div>
+
+                    <button  type="submit" class="btn  mx-auto btn-success my-3">Add new user</button>
+
+                  </form>
+                 <!-- END FORM NEW USER-->
+                </div>
+              </div>
+
+
+
+
+
+             <!-- END NEW USER-->
+            </div>
+
+          </div>
+
+
+
+
+        </div>
+     <!--   END ADMIN PANEL-->
+
+        <!--USER PANEL-->
+        <div class="tab-pane fade" id="v-pills-user"
+             role="tabpanel" aria-labelledby="v-pills-user-tab">
+
+
+          <div class="container-fluid bg-light  g-0">
+            <p class="fs-1">User information-page</p>
+            <div class="card" >
+              <div class="card-header  fs-6">
+                About user
+              </div>
+              <div class="card-body">
+                <table class="table table-striped">
+                  <thead>
+                  <tr>
+
+                    <th scope="col">ID</th>
+                    <th scope="col">First name</th>
+                    <th scope="col">Last name</th>
+                    <th scope="col">Age</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Role</th>
+
+                  </tr>
+                  </thead>
+                  <tbody>
+
+
+                  <tr th:each="user:${users}">
+                    <td th:text="${user.id}"></td>
+                    <td th:text="${user.name}"></td>
+                    <td th:text="${user.lastName}"></td>
+                    <td th:text="${user.age}"></td>
+                    <td th:text="${user.email}"></td>
+                    <td>
+                      <th:block th:each="role : ${user.roles}">
+                        <span th:utext="${#strings.substring(role.name,5)}"></span>
+                      </th:block>
+                    </td>
+                    <td >
+
+
+
+
+                  </tr>
+
+
+
+
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        </div>
+        <!--END USER PANEL-->
+
+
+
+
+
+
+
+
+
+
+      <!--End ADMIN+USER-->
+    </div>
+  </div>
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous">
+</script>
+</body>
+
+
+
+
+
+
+
+
+
+
+
