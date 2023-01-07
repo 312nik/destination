@@ -1,6 +1,6 @@
 package com.kata312.service;
 
-import com.kata312.model.Role;
+import com.kata312.exception.RecordNotFoundException;
 import com.kata312.model.User;
 import com.kata312.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,9 +8,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.security.InvalidParameterException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.Set;
 
 @Service
 
@@ -30,34 +31,55 @@ public class UserServiceImpl  implements UserService {
 
     }
 
-    public List<User> findAll() {
 
-        return userRepository.findAll();
+
+
+    public List<User> findAll() {
+        List<User> result = (List<User>) userRepository.findAll();
+        if (result.size() > 0) {
+            return result;
+        } else {
+            return new ArrayList<User>();
+        }
+    }
+
+
+    public Optional<User> getUserById(Long id) {
+        Optional<User> user = userRepository.findById(id);
+
+            return user;
 
     }
+
+@Transactional
+    public  void deleteUser(Long id)
+            throws RecordNotFoundException {
+        Optional<User> user = userRepository.findById(id);
+        if (user.isPresent()) {
+            userRepository.deleteById(id);
+        } else {
+            throw new RecordNotFoundException
+                    ("No user record exist for given id");
+        }
+    }
+
     @Transactional
     public void saveUser(User user) {
 
-        User userNew= userRepository.findUserByEmail(user.getEmail());
-        if (userNew==null){
-        user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
-        userRepository.save(user);}
+
+        /*if(user.getId()!= null) {
+            User userBase = findById(user.getId());
+            if (!userBase.getPassword().equals(user.getPassword())) {
+                user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
+            }
+        } else {*/
+
+            user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));/*}*/
+        userRepository.save(user);
 
     }
 
 
-    @Transactional
-    public void update(Long id, User updateUser) {
-
-        updateUser.setId(id);
-        userRepository.save(updateUser);
-    }
-    @Transactional
-    public void deleteUser(User user) {
-
-        userRepository.delete(user);
-
-    }
 
     @Override
     public User findUserByEmail(String email) {
@@ -66,15 +88,4 @@ public class UserServiceImpl  implements UserService {
 
     }
 
-    @Override
-    public String getRolesToString(User user) {
-
-        Set<Role> roles=user.getRoles();
-        String getRoles = null;
-        for (Role role:roles) {
-            getRoles=(role.toString().substring(5)+" ");
-        }
-        assert getRoles != null;
-        return  getRoles.trim();
-    }
 }

@@ -1,5 +1,6 @@
 package com.kata312.controller;
 
+import com.kata312.exception.RecordNotFoundException;
 import com.kata312.model.Role;
 import com.kata312.model.User;
 import com.kata312.service.RoleServiceImpl;
@@ -52,14 +53,7 @@ public class AdminController {
     }
 
 
-   /* @GetMapping("admin/new")
-    public String createUserForm(User user,Model model) {
 
-        List <Role> roles= roleService.getAllRole();
-        model.addAttribute("roles",roles);
-
-        return "admin/new";
-    }*/
 
     @PostMapping("admin/new")
     public String createUser(@ModelAttribute("newUser")  User user, RedirectAttributes redirectAttributes) {
@@ -69,42 +63,44 @@ public class AdminController {
             redirectAttributes.addFlashAttribute("message",
                     "A user with such an email already exists!");
         }
-
-
-
-    userService.saveUser(user);
+        userService.saveUser(user);
         return "redirect:/admin";
 
     }
 
     @PostMapping("/admin/delete/{id}")
-    public String deleteUser(@PathVariable("id") Long id, Model model) {
-        User user = userService.findById(id);
-        userService.deleteUser(user);
-        return "redirect:/admin/users";
+    public String deleteUser(@PathVariable("id") Long id) throws RecordNotFoundException {
+
+        userService.deleteUser(id);
+        return "redirect:/admin";
 
     }
 
-    @GetMapping("/admin/edit/{id}")
-    public String edit(@PathVariable("id") Long id, Model model) {
-        List<Role> roles=  roleService.getAllRole();
-        model.addAttribute("roles",roles);
-        User user = userService.findById(id);
-        model.addAttribute("user", user);
-        return "/admin/edit";
 
-    }
 
     @PostMapping("/admin/edit")
-    public String update(User user,@RequestParam(value = "selectRoles") String[] selectRole) {
-        Set <Role> roles =  new HashSet<>();
-        for (String role: selectRole ) {
-            roles.add(roleService.getRoleByName(role));
+    public String update(User user, RedirectAttributes redirectAttributes,@RequestParam(value = "selectRoles") String[] selectRole) {
+
+        User userUpdate= userService.findUserByEmail(user.getEmail());
+
+        if (userUpdate !=null){
+            redirectAttributes.addFlashAttribute("message",
+                    "A user with such an email already exists!");
         }
-        user.setRoles(roles);
+
+
+
+
+
+            Set <Role> roles =  new HashSet<>();
+            for (String role: selectRole ) {
+                roles.add(roleService.getRoleByName(role));
+            }
+            user.setRoles(roles);
+
 
         userService.saveUser(user);
-        return "redirect:/admin/users";
+        return "redirect:/admin";
 
     }
 

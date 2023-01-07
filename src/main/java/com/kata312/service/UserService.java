@@ -1,5 +1,6 @@
 package com.kata312.service;
 
+import com.kata312.exception.RecordNotFoundException;
 import com.kata312.model.User;
 
 import java.util.List;
@@ -12,12 +13,12 @@ public interface UserService {
 
     void saveUser(User user);
 
-    void update(Long id, User updateUser);
 
-    void deleteUser(User user);
+
+    void deleteUser(Long id) throws RecordNotFoundException;
     User findUserByEmail(String email);
 
-    String getRolesToString(User user);
+
 
 
 }
