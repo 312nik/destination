@@ -64,6 +64,8 @@ public class AdminController {
         if (userNew !=null){
             redirectAttributes.addFlashAttribute("message",
                     "A user with such an email already exists!");
+
+            return "redirect:/admin";
         }
         userService.saveUser(user);
         return "redirect:/admin";
