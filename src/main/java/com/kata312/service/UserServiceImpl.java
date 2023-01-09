@@ -43,12 +43,7 @@ public class UserServiceImpl  implements UserService {
     }
 
 
-    public Optional<User> getUserById(Long id) {
-        Optional<User> user = userRepository.findById(id);
 
-            return user;
-
-    }
 
 @Transactional
     public  void deleteUser(Long id)
@@ -79,7 +74,14 @@ public class UserServiceImpl  implements UserService {
     @Transactional
     public void updateUser(User user) {
 
+
+        if (user.getPassword().isEmpty()) {
+            user.setPassword(userRepository.findById(user.getId()).get().getPassword());
+        } else {
+            user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
+        }
         userRepository.save(user);
+
 
   }
 }

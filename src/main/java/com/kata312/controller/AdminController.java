@@ -8,6 +8,7 @@ import com.kata312.service.UserServiceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import org.springframework.validation.BindingResult;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.validation.Valid;
+import java.security.InvalidParameterException;
 import java.security.Principal;
 import java.util.HashSet;
 import java.util.List;
@@ -25,13 +27,13 @@ import java.util.Set;
 public class AdminController {
 
     private final UserServiceImpl userService;
-    private final RoleServiceImpl roleService;
+
 
     @Autowired
-    public AdminController(UserServiceImpl userService, RoleServiceImpl roleService) {
+    public AdminController(UserServiceImpl userService) {
 
         this.userService = userService;
-        this.roleService = roleService;
+
 
     }
 
@@ -54,7 +56,7 @@ public class AdminController {
 
 
 
-
+@Transactional
     @PostMapping("admin/new")
     public String createUser(@ModelAttribute("newUser")  User user, RedirectAttributes redirectAttributes) {
         User userNew= userService.findUserByEmail(user.getEmail());
@@ -83,6 +85,11 @@ public class AdminController {
 
 
 
+        if (userService.findUserByEmail(user.getUsername()) != null &&
+                !userService.findUserByEmail(user.getUsername()).getId().equals(user.getId())) {
+            redirectAttributes.addFlashAttribute("message",
+                    "A user with such an email already exists!");
+        }
 
         userService.updateUser(user);
         return "redirect:/admin";
