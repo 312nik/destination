@@ -79,27 +79,12 @@ public class AdminController {
 
 
     @PostMapping("/admin/edit")
-    public String update(User user, RedirectAttributes redirectAttributes,@RequestParam(value = "selectRoles") String[] selectRole) {
-
-        User userUpdate= userService.findUserByEmail(user.getEmail());
-
-        if (userUpdate !=null){
-            redirectAttributes.addFlashAttribute("message",
-                    "A user with such an email already exists!");
-        }
+    public String update( User user, RedirectAttributes redirectAttributes) {
 
 
 
 
-
-            Set <Role> roles =  new HashSet<>();
-            for (String role: selectRole ) {
-                roles.add(roleService.getRoleByName(role));
-            }
-            user.setRoles(roles);
-
-
-        userService.saveUser(user);
+        userService.updateUser(user);
         return "redirect:/admin";
 
     }

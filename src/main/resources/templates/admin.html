@@ -90,59 +90,63 @@
                                th:data-bs-target="${'#editModal'+user.id}">Edit</button>
 	                    
               <!--      EDIT MODAL-->
-		        
-	                  <div class="modal fade" th:id="${'editModal' + user.id}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
-		                  <div class="modal-dialog">
-			                  <div class="modal-content">
-				                  <div class="modal-header">
-					                  <h5 class="modal-title">Edit user</h5>
-					                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-				                  </div>
-				                  <div class="modal-body  mx-auto  ">
-					                  <form  th:method="POST" th:action="@{/admin/edit/{id}(id=${user.id})}"  th:id="${'editForm' + user.id}">
-						                
+
+						                    <div class="modal fade" th:id="${'editModal' + user.id}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+							                    <div class="modal-dialog">
+								                    <div class="modal-content">
+									                    <div class="modal-header">
+										                    <div class="modal-title fs-4" >Edit user</div>
+										                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+									                    </div>
+									                    <div class="modal-body mx-auto ">
+										                    <form th:method="POST" th:action="@{/admin/edit}" autocomplete="off" th:id="${'editForm' + user.id}">
+						
+						                    <div class="form-group  mx-auto text-centre w-100 ">
 							
-							                  <div class="form-group  mx-auto text-centre w-100 ">
-								
-								                  <label class="form-label d-block mx-auto pt-1  text-center fw-bold" for="idEdit">ID</label>
-								                  <input th:value="${user.id}" type="text" class="form-control" id="idEdit"  disabled>
-								    
-								                  
-								                  <label class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="nameEdit">First Name</label>
-								                  <input th:value="${user.name}" type="text" class="form-control" id="nameEdit" placeholder="First name">
-								
-								                  <label class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="lastnameEdit">Last Name</label>
-								                  <input th:value="${user.lastName}" type="text" class="form-control" id="lastnameEdit" >
-								
-								                  <label class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="ageEdit">Age</label>
-								                  <input th:value="${user.age}" type="number" class="form-control " id="ageEdit" >
-								
-								
-								                  <label  class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="emailEdit">Email</label>
-								                  <input th:value="${user.email}" type="email" class="form-control" id="emailEdit" >
-								
-								                  <label class="form-label d-block mx-auto pt-1  text-center fw-bold" for="passwordEdit">Password</label>
-								                  <input th:value="${user.password}" type="password" class="form-control" id="passwordEdit" >
-								
-								
-								                  <label  for="rolesEdit" class="form-label d-block mx-auto pt-1  text-center  fw-bold">Role</label>
-								                  <select name="roles" size="2" multiple required class="form-select mx-auto"   id="rolesEdit">
-									                  <option value="1">ADMIN</option>
-									                  <option value="2">USER</option>
-								                  </select>
-							                  </div>
-					                  </form>
-				                  </div>
-				                  <div class="modal-footer">
-					                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-					
-					                  <input type="submit" th:form="${'editForm' + user.id}" class="btn btn-primary " value="Edit"/>
-					
-					                
-				                  </div>
-			                  </div>
-		                  </div>
-	                  </div>
+							                    <label class="form-label d-block mx-auto pt-1  text-center fw-bold" for="idEdit">ID</label>
+							                    <input name="id" th:value="${user.id}" type="text" class="form-control" id="idEdit"  readonly>
+							
+							
+							                    <label class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="nameEdit">First Name</label>
+							                    <input name="name" th:value="${user.name}" type="text" class="form-control" id="nameEdit" placeholder="First name">
+							
+							                    <label class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="lastnameEdit">Last Name</label>
+							                    <input name="lastName" th:value="${user.lastName}" type="text" class="form-control" id="lastnameEdit" >
+							
+							                    <label class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="ageEdit">Age</label>
+							                    <input name="age" th:value="${user.age}" type="number" class="form-control " id="ageEdit" >
+							
+							
+							                    <label  class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="emailEdit">Email</label>
+							                    <input name="email" th:value="${user.email}" type="email" class="form-control" id="emailEdit" >
+							
+							                    <label class="form-label d-block mx-auto pt-1  text-center fw-bold" for="passwordEdit">Password</label>
+							                    <input name="password" th:value="${user.password}" type="password" class="form-control" id="passwordEdit" >
+							
+							
+							                    <label  for="rolesEdit" class="form-label d-block mx-auto pt-1  text-center  fw-bold">Role</label>
+							                    <select name="roles" size="2" multiple required class="form-select mx-auto"   id="rolesEdit">
+								                    <option value="1">ADMIN</option>
+								                    <option value="2" selected>USER</option>
+							                    </select>
+						                    </div>
+					                    </form>
+				                    </div>
+						          <div class="modal-footer">
+						                 <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
+						                  <input type="submit" th:form="${'editForm' + user.id}" class="btn btn-primary fs-5" value="Edit"/>
+							      </div>
+			                    </div>
+		                    </div>
+	                    </div>
+	                   
+	                   
+	                   
+	                   
+	                   
+	                   
+	                   
+
                     <!-- END EDIT MODAL-->
 	                   
                     </td>
@@ -232,7 +236,7 @@
                       <input th:field="*{lastName}" type="text" class="form-control" id="lastname" placeholder="Last name">
 
                       <label class="form-label d-block fw-bold" for="age">Age</label>
-                      <input type="number" th:field="*{age}"  class="form-control " id="age" placeholder="Age">
+                      <input th:field="*{age}" type="number" class="form-control " id="age"  autocomplete="off" placeholder="Age">
 	
 	                    
                       <label  class="fw-bold" for="email">Email</label>
@@ -245,7 +249,7 @@
                       <label  for="roles" class="com-form-label fw-bold">Role</label>
                       <select name="roles" size="2" multiple required class="form-select mx-auto"   id="roles">
                         <option value="1">ADMIN</option>
-                        <option value="2">USER</option>
+                        <option value="2" selected >USER</option>
                       </select>
                     </div>
                     <button  type="submit" class="btn  mx-auto btn-success my-3">Add new user</button>

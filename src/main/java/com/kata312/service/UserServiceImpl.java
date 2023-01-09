@@ -8,7 +8,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.security.InvalidParameterException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -63,29 +62,28 @@ public class UserServiceImpl  implements UserService {
         }
     }
 
-    @Transactional
-    public void saveUser(User user) {
-
-
-        /*if(user.getId()!= null) {
-            User userBase = findById(user.getId());
-            if (!userBase.getPassword().equals(user.getPassword())) {
-                user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
-            }
-        } else {*/
-
-            user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));/*}*/
-        userRepository.save(user);
-
-    }
-
-
-
     @Override
     public User findUserByEmail(String email) {
-
         return userRepository.findUserByEmail(email);
+    }
+
+    @Transactional
+    public void saveUser(User user) {
+          user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
+        userRepository.save(user);
+
 
     }
 
+    @Override
+    @Transactional
+    public void updateUser(User user) {
+
+        userRepository.save(user);
+
+  }
 }
+
+
+
+
