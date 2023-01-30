@@ -1,26 +1,28 @@
 package com.kata312.service;
 
 import com.kata312.exception.RecordNotFoundException;
+import com.kata312.model.Role;
 import com.kata312.model.User;
+import com.kata312.repository.RoleRepository;
 import com.kata312.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 
 public class UserServiceImpl  implements UserService {
 
     private final UserRepository userRepository;
+    private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bcryptPasswordEncoder;
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder bcryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bcryptPasswordEncoder) {
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
         this.bcryptPasswordEncoder = bcryptPasswordEncoder;
     }
 
@@ -64,10 +66,14 @@ public class UserServiceImpl  implements UserService {
 
     @Transactional
     public void saveUser(User user) {
-          user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
+
+        Set <Role> userRole =  new HashSet<>();
+        for (Role role: user.getRoles() ) {
+            userRole.add(roleRepository.getRoleByName(role.getName()));
+        }
+        user.setRoles(userRole);
+        user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
-
-
     }
 
     @Override

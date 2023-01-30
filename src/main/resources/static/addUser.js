@@ -4,16 +4,18 @@ $("#addNewUser").click(
     async () =>  {
         let addUserForm = $('#newUser');
 
-        let Roles = [];
+   /*     let Roles = [];
         for (let i = 0; i < newUserRoles.length; i++) {
             alert(newUserRoles[i].value);
-            alert(newUserRoles[i].options)
-        }
+
+        }*/
 
 
-           /* let selected = Array.from(newUserRoles.options)
+            let selected = Array.from(newUserRoles.options)
                 .filter(option => option.selected)
-                .map(option => option.value);*/
+                .map(option => option.value.toString());
+
+
 
        /* alert(addUserForm.find('#newUserName').val().trim())
         alert(addUserForm.find('#newUserLastName').val().trim())
@@ -30,7 +32,7 @@ $("#addNewUser").click(
             age:addUserForm.find('#newUserAge').val().trim(),
             email:addUserForm.find('#newUserEmail').val().trim(),
             password:addUserForm.find('#newUserPassword').val().trim(),
-            roles:listOfRole
+            roles:selected
         }
 
       let method = {
