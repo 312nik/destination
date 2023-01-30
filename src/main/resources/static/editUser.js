@@ -38,7 +38,7 @@ function editUser() {
        
         }
 
-        fetch("http://localhost:8080/api/users/" + editForm.id.value, {
+        fetch("/api/users/" + editUserForm.find('#idEdit').value, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
