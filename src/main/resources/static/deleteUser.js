@@ -22,3 +22,41 @@ async function showEditModal(id) {
     let response = await fetch(url);
     return await response.json();
 }
+    
+    
+$(async function() {
+    deleteUser();
+
+});
+function deleteUser() {
+    
+    deleteUserForm.addEventListener("submit", event => {
+        event.preventDefault();
+        
+         let selected = Array.from(newUserRoles.options)
+                .filter(option => option.selected)
+                .map(option => option.value.toString());
+
+       
+        }
+
+        fetch("/api/users/" + deleteUserForm.find('#idDelete').value, {
+            method: 'Delete',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+            id:addUserForm.find('#idDelete').val(),
+            name:addUserForm.find('#nameDelete').val().trim(),
+            lastName:addUserForm.find('#lastnameDelete').val().trim(),
+            age:addUserForm.find('#ageDelete').val(),
+            email:addUserForm.find('#emailDelete').val().trim(),
+            password:addUserForm.find('#passwordDelete').val().trim(),
+            roles:selected
+            })
+        }).then(() => {
+            $('#editClose').click();
+            allUsers();
+        })
+    })
+}   
