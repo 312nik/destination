@@ -1,52 +1,38 @@
+$(async function() {
+    await createUser();
+});
+async function createUser() {
+  
+     let addUserForm = $('#newUser');
 
+    addUserForm.addEventListener('submit', addNewUser)
 
-$("#addNewUser").click(
-    async () =>  {
-        let addUserForm = $('#newUser');
-
-   /*     let Roles = [];
-        for (let i = 0; i < newUserRoles.length; i++) {
-            alert(newUserRoles[i].value);
-
-        }*/
-
-
-            let selected = Array.from(newUserRoles.options)
+    function addNewUser(e) {
+        e.preventDefault();
+          let selected = Array.from(newUserRoles.options)
                 .filter(option => option.selected)
                 .map(option => option.value.toString());
 
-
-
-       /* alert(addUserForm.find('#newUserName').val().trim())
-        alert(addUserForm.find('#newUserLastName').val().trim())
-        alert(addUserForm.find('#newUserAge').val().trim())
-        alert(addUserForm.find('#newUserEmail').val().trim())
-        alert(addUserForm.find('#newUserPassword').val().trim())
-        alert(selected)*/
-
-
-
-        let data = {
-            name:addUserForm.find('#newUserName').val().trim(),
+        
+        fetch("/api/users", {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+             name:addUserForm.find('#newUserName').val().trim(),
             lastName:addUserForm.find('#newUserLastName').val().trim(),
-            age:addUserForm.find('#newUserAge').val().trim(),
+            age:addUserForm.find('#newUserAge').val(),
             email:addUserForm.find('#newUserEmail').val().trim(),
             password:addUserForm.find('#newUserPassword').val().trim(),
             roles:selected
-        }
+            })
+        }).then(() => {
+            form.reset();
+            allUsers();
+            $('#nav-user-table-tab').click();
+        })
+    }
 
-      let method = {
-                    method: 'POST',
-                    headers: {
-                            'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-            }
+}
 
-
-            await fetch("/api/users", method).then(() => {
-
-            });
-
-
-});
