@@ -92,18 +92,7 @@ tbody.addEventListener("click", (e) => {
     e.preventDefault();
     let id = e.target.getAttribute("id");
     editUser(id);
-    const updateUser = await data.json();
-  async function showEditModal(id) {
-    $('#rolesEditUser').empty();
-    let user = await getUser(id);
-    let editUserForm = $('#formEditUser');
-    editUserForm.find('#idEdit').value=user.id,
-    editUserForm.find('#nameEdit').value=user.name,
-    editUserForm.find('#lastnameEdit').value=user.lastName,
-    editUserForm.find('#ageEdit').value=user.age,  
-    editUserForm.find('#emailEdit').value=user.email,
-    editUserForm.find('#passwordEdit').value=user.password,
-  }
+    
 });
 
 const editUser = async (id) => {
@@ -112,53 +101,46 @@ const editUser = async (id) => {
     headers: {
                 'Content-Type': 'application/json'
             },
-  });
+  });  
 
-  
-  const updateUser = await data.json();
-  async function showEditModal(id) {
-    $('#rolesEditUser').empty();
-    let user = await getUser(id);
-    let editUserForm = $('#formEditUser');
-    editUserForm.find('#idEdit').value=user.id,
-    editUserForm.find('#nameEdit').value=user.name,
-    editUserForm.find('#lastnameEdit').value=user.lastName,
-    editUserForm.find('#ageEdit').value=user.age,  
-    editUserForm.find('#emailEdit').value=user.email,
-    editUserForm.find('#passwordEdit').value=user.password,
-  
-  
- 
+ const response = await data.json();
+  document.getElementById("idEdit").value = response.id;
+  document.getElementById("nameEdit").value = response.name;
+  document.getElementById("lastnameEdit").value = response.lastName;
+  document.getElementById("ageEdit").value = response.age;
+  document.getElementById("mailEdit").value = response.mail;
+   document.getElementById("passwordEdit").value = response.password;
+};
 };
 
 // Update User Ajax Request
 updateForm.addEventListener("submit", async (e) => {
   e.preventDefault();
-
-  const formData = new FormData(updateForm);
-  formData.append("update", 1);
-
-  if (updateForm.checkValidity() === false) {
-    e.preventDefault();
-    e.stopPropagation();
-    updateForm.classList.add("was-validated");
-    return false;
-  } else {
-    document.getElementById("edit-user-btn").value = "Please Wait...";
-
-    const data = await fetch("action.php", {
-      method: "POST",
-      body: formData,
-    });
-    const response = await data.text();
-
-    showAlert.innerHTML = response;
-    document.getElementById("edit-user-btn").value = "Add User";
-    updateForm.reset();
-    updateForm.classList.remove("was-validated");
-    editModal.hide();
-    fetchAllUsers();
-  }
+  
+ let selected = Array.from(newUserRoles.options)
+                .filter(option => option.selected)
+                .map(option => option.value.toString());
+  
+   fetch("/api/users/{id}", {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+            id:addUserForm.find('#idEdit').val(),
+            name:addUserForm.find('#nameEdit').val().trim(),
+            lastName:addUserForm.find('#lastnameEdit').val().trim(),
+            age:addUserForm.find('#ageEdit').val(),
+            email:addUserForm.find('#emailEdit').val().trim(),
+            password:addUserForm.find('#passwordEdit').val().trim(),
+            roles:selected
+            })
+        }).then(() => {
+            $('#editClose').click();
+            allUsers();
+        })
+  
+  
 });
 
 // Delete User Ajax Request
@@ -171,10 +153,10 @@ tbody.addEventListener("click", (e) => {
 });
 
 const deleteUser = async (id) => {
-  const data = await fetch(`action.php?delete=1&id=${id}`, {
-    method: "GET",
+  const data = await fetch(`/api/users/{id}`, {
+    method: "DELETE",
   });
   const response = await data.text();
-  showAlert.innerHTML = response;
+ 
   fetchAllUsers();
 };
