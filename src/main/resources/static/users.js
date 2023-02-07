@@ -1,40 +1,18 @@
+
 $(async function() {
     await allUsers();
-    getPrincipal();
 });
-/*
-principal*/
 
-function getPrincipal() {
-    fetch("/api/user")
-        .then(res => res.json())
-        .then(data => {
-            $('#user-email').append(data.email);
-
-            $('#user-roles').append(data.roleToString);
-            let user = `$(
-                <tr>
-                    <td>${data.id}</td>
-                    <td>${data.name}</td>
-                    <td>${data.lastName}</td>
-                    <td>${data.age}</td>   
-                    <td>${data.email}</td>
-                    <td>${data.roleToString}</td>
-                </tr>)`;
-            $('#tbody').append(user);
-        })
-}
-
-
-/*allUSers*/
-
-const table = $('#tbodyAllUser');
 
 async function allUsers() {
-    table.empty()
-    fetch("/api/users")
-        .then(res => res.json())
-        .then(data => {
+    $.ajax({
+        url: '/api/users',
+        method: 'get',
+        dataType: 'json',
+        success: function (data) {
+
+            const table = $('#tbodyAllUser');
+
             data.forEach(user => {
                 let allUsers = `$(
                         <tr>
@@ -45,18 +23,21 @@ async function allUsers() {
                             <td>${user.email}</td>
                             <td>${user.roleToString}</td>
                             <td>
+                            
+                            
                                 <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" id="buttonEdit"
-                                data-action="edit" data-id="${user.id}" data-target="#editModal">Edit</button>       
-                                /*onclick="editModalData(${user.id}*/
+                                 data-bs-target="#editModal" onclick="editModalData(${user.id})"> Edit </button>
+                             
                         
                             </td>
                             <td>
                                 <button type="button" class="btn btn-danger text-white" data-bs-toggle="modal" id="buttonDelete"
-                                data-action="delete" data-id="${user.id}" data-target="#deleteModal">Delete</button>
-                               /*onclick="deleteModalData(${user.id}*/
+                              data-target="#deleteModal" onclick="deleteModalData(${user.id})" >Delete</button>
+                             
                             </td>
                         </tr>)`;
                 table.append(allUsers);
             })
-        })
+        }
+    });
 }

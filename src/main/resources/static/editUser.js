@@ -1,60 +1,42 @@
-$('#editModal').on('show.bs.modal', event => {
-    let button = $(event.relatedTarget);
-    let id = button.data('id');
-    showEditModal(id);
-})
 
-async function showEditModal(id) {
-    $('#rolesEditUser').empty();
-    let user = await getUser(id);
-    let editUserForm = $('#formEditUser');
-    editUserForm.find('#idEdit').value=user.id,
-    editUserForm.find('#nameEdit').value=user.name,
-    editUserForm.find('#lastnameEdit').value=user.lastName,
-    editUserForm.find('#ageEdit').value=user.age,  
-    editUserForm.find('#emailEdit').value=user.email,
-    editUserForm.find('#passwordEdit').value=user.password,
-    
-    
-    
-    async function getUser(id) {
-    let url = "/api/users/" + id;
-    let response = await fetch(url);
-    return await response.json();
-}
-    
- $(async function() {
-    editUser();
 
-});
-function editUser() {
-    
-    editUserForm.addEventListener("submit", event => {
-        event.preventDefault();
-         let selected = Array.from(newUserRoles.options)
-                .filter(option => option.selected)
-                .map(option => option.value.toString());
+const formEdit = document.getElementById('formEditing');
+const idEdit=document.getElementById('idEdit');
+const firstnameEdit=document.getElementById('nameEdit');
+const lastnameEdit=document.getElementById('lastnameEdit');
+const ageEdit=document.getElementById('ageEdit');
+const emailEdit=document.getElementById('emailEdit');
+const passwordEdit=document.getElementById('passwordEdit');
 
-       
+async function editModalData(id) {
+
+    const urlEdit= '/api/users/' + id;
+
+    $.ajax({
+        url: urlEdit,
+        method: 'get',
+        dataType: 'json',
+        success: function (data) {
+            $('idEdit').append(data.email);
+            firstnameEdit.value = data.firstname;
+            lastnameEdit.value = data.lastName;
+            ageEdit.value = data.age;
+            emailEdit.value = data.email;
+            passwordEdit.value = data.password;
+
+        },
+        error: function (jqXHR, exception){
+            alert('Uncaught Error. ' + jqXHR.responseText);
         }
 
-        fetch("/api/users/" + editUserForm.find('#idEdit').value, {
-            method: 'PUT',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-            id:addUserForm.find('#idEdit').val(),
-            name:addUserForm.find('#nameEdit').val().trim(),
-            lastName:addUserForm.find('#lastnameEdit').val().trim(),
-            age:addUserForm.find('#ageEdit').val(),
-            email:addUserForm.find('#emailEdit').val().trim(),
-            password:addUserForm.find('#passwordEdit').val().trim(),
-            roles:selected
-            })
-        }).then(() => {
-            $('#editClose').click();
-            allUsers();
-        })
+
     })
-}   
+}
+
+
+
+
+
+
+
+

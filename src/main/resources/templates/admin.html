@@ -75,19 +75,20 @@
 									<tbody id="tbodyAllUser">
 									</tbody>
 									
-									<!--      EDIT MODAL-->
-									<!--
-																				<div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+								<!--	      EDIT MODAL-->
+																				<div class="modal fade"  tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true" id="editModal">
 																					<div class="modal-dialog">
 																						<div class="modal-content">
+																							<form id="formEditing" autocomplete="off" >
 																							<div class="modal-header">
+																								
 																								<div class="modal-title fs-4" >Edit user</div>
 																								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 																							</div>
 																							<div class="modal-body mx-auto ">
-																								<form  id="formEditUser" autocomplete="off" ">
+																							
 															
-																				<div class="form-group  mx-auto text-centre w-100 ">
+																				               <div class="form-group  mx-auto text-centre w-100 ">
 																
 																					<label class="form-label d-block mx-auto pt-1  text-center fw-bold" for="idEdit">ID</label>
 																					<input name="id"  type="text" class="form-control" id="idEdit"  readonly>
@@ -116,29 +117,29 @@
 																						<option value="ROLE_USER" selected>USER</option>
 																					</select>
 																				</div>
-																			</form>
+																			
 																		</div>
 																	  <div class="modal-footer">
-																			 <button type="button" class="btn btn-secondary " data-bs-dismiss="modal" id="editClose">Close</button>
-																			  <input type="submit" " class="btn btn-primary fs-5" value="Edit"/>
+																			 <button type="button" class="btn btn-secondary " data-bs-dismiss="modal">Close</button>
+																			  <input type="submit"  class="btn btn-primary fs-5" value="Edit"/>
 																	  </div>
+																							</form>
 																	</div>
 																</div>
 															</div>
 														   
-														   -->
 									
 									
 									
 									
 									
 									
-									<!-- END EDIT MODAL-->
+						<!--			 END EDIT MODAL-->
 									
 									
 									
 									<!--DELETE MODAL-->
-									<!--      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+									<!--      <div class="modal fade" th:id="${'deleteModal' + user.id}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
 											  <div class="modal-dialog">
 												  <div class="modal-content">
 													  <div class="modal-header">
@@ -146,7 +147,7 @@
 														  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 													  </div>
 													  <div class="modal-body">
-														  <form id="formDeleteUser">
+														  <form  th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.id})}"  th:id="${'deleteForm' + user.id}">
 										
 										
 															  <div class="form-group  mx-auto text-centre ">
@@ -213,22 +214,22 @@
 										
 										
 										<label class="fw-bold" for="newUserName">First Name</label>
-										<input type="text" class="form-control" id="newUserName"  placeholder="First name">
+										<input type="text" class="form-control" id="newUserName"  name="firstname" placeholder="First name">
 										
 										
 										
 										  <label class="fw-bold" for="newUserLastName">Last Name</label>
-										  <input type="text" class="form-control" id="newUserLastName" placeholder="Last name">
+										  <input type="text" class="form-control" id="newUserLastName" name="lastname" placeholder="Last name">
 					
 										  <label class="form-label d-block fw-bold" for="newUserAge">Age</label>
-										  <input type="number" class="form-control " id="newUserAge"  autocomplete="off" placeholder="Age">
+										  <input type="number" class="form-control " id="newUserAge"  name="age" autocomplete="off" placeholder="Age">
 						
 											
 										  <label  class="fw-bold" for="newUserEmail">Email</label>
-										  <input  type="email" class="form-control" id="newUserEmail" placeholder="Email">
+										  <input  type="email" class="form-control" id="newUserEmail"  name="email" placeholder="Email">
 					
 										  <label class="fw-bold" for="newUserPassword">Password</label>
-										  <input type="password" class="form-control" id="newUserPassword" placeholder="Password">
+										  <input type="password" class="form-control" id="newUserPassword" name="password" placeholder="Password">
 										
 										
 															  <label  for="newUserRoles" class="com-form-label fw-bold">Role</label>

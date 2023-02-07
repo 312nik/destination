@@ -1,10 +1,13 @@
 
 getPrincipal();
 
+
 function getPrincipal() {
-    fetch("/api/user")
-        .then(res => res.json())
-        .then(data => {
+    $.ajax({
+        url: '/api/user',
+        method: 'get',
+        dataType: 'json',
+        success: function (data) {
             $('#user-email').append(data.email);
 
             $('#user-roles').append(data.roleToString);
@@ -18,6 +21,7 @@ function getPrincipal() {
                     <td>${data.roleToString}</td>
                 </tr>)`;
             $('#tbody').append(user);
-        })
-}
 
+        }
+    });
+}

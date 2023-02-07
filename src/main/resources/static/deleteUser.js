@@ -1,62 +1,32 @@
-$('#deleteModal').on('show.bs.modal', event => {
-    let button = $(event.relatedTarget);
-    let id = button.data('id');
-    showEditModal(id);
-})
+const formDelete = document.getElementById('formDelete');
+const idDelete=document.getElementById('idDelete');
+const firstnameDelete=document.getElementById('nameDelete');
+const lastnameDelete=document.getElementById('lastnameDelete');
+const ageDelete=document.getElementById('ageDelete');
+const emailDelete=document.getElementById('emailDelete');
+const passwordDelete=document.getElementById('passwordDelete');
 
-async function showEditModal(id) {
-  
-    let user = await getUser(id);
-    let deleteUserForm = $('#formDeleteUser');
-    editUserForm.find('#idDelete').value=user.id,
-    editUserForm.find('#nameDelete').value=user.name,
-    editUserForm.find('#lastnameDelete').value=user.lastName,
-    editUserForm.find('#ageDelete').value=user.age,  
-    editUserForm.find('#emailDelete').value=user.email,
-    editUserForm.find('#passwordDelete').value=user.password,
-    
-    
-    
-    async function getUser(id) {
-    let url = "/api/users/" + id;
-    let response = await fetch(url);
-    return await response.json();
-}
-    
-    
-$(async function() {
-    deleteUser();
+async function deleteModalData(id) {
 
-});
-function deleteUser() {
-    
-    deleteUserForm.addEventListener("submit", event => {
-        event.preventDefault();
-        
-         let selected = Array.from(newUserRoles.options)
-                .filter(option => option.selected)
-                .map(option => option.value.toString());
+    const urlEdit= '/api/users/' + id;
 
-       
+    $.ajax({
+        url: urlEdit,
+        method: 'get',
+        dataType: 'json',
+        success: function (data) {
+            $('idEdit').append(data.email);
+            firstnameEdit.value = data.firstname;
+            lastnameEdit.value = data.lastName;
+            ageEdit.value = data.age;
+            emailEdit.value = data.email;
+            passwordEdit.value = data.password;
+
+        },
+        error: function (jqXHR, exception){
+            alert('Uncaught Error. ' + jqXHR.responseText);
         }
 
-        fetch("/api/users/" + deleteUserForm.find('#idDelete').value, {
-            method: 'Delete',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-            id:addUserForm.find('#idDelete').val(),
-            name:addUserForm.find('#nameDelete').val().trim(),
-            lastName:addUserForm.find('#lastnameDelete').val().trim(),
-            age:addUserForm.find('#ageDelete').val(),
-            email:addUserForm.find('#emailDelete').val().trim(),
-            password:addUserForm.find('#passwordDelete').val().trim(),
-            roles:selected
-            })
-        }).then(() => {
-            $('#editClose').click();
-            allUsers();
-        })
+
     })
-}   
+}
