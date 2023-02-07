@@ -32,11 +32,11 @@ public class AdminRestController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
-    /*@GetMapping("/users/{id}")
+    @GetMapping("/users/{id}")
     public ResponseEntity<User> showUser(@PathVariable("id") Integer id) {
         User user = userService.showUser(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
-    }*/
+    }
 
     @PostMapping("/users")
     public ResponseEntity<HttpStatus> addUser(@RequestBody User user) {
