@@ -26,13 +26,13 @@ async function allUsers() {
                             
                             
                                 <button type="button" class="btn btn-info text-white" data-bs-toggle="modal" id="buttonEdit"
-                                 data-bs-target="#editModal" onclick="editModalData(${user.id})"> Edit </button>
+                                 data-bs-target="#editModal" onclick=editModalData(${user.id})> Edit </button>
                              
                         
                             </td>
                             <td>
                                 <button type="button" class="btn btn-danger text-white" data-bs-toggle="modal" id="buttonDelete"
-                              data-target="#deleteModal" onclick="deleteModalData(${user.id})" >Delete</button>
+                              data-bs-target="#deleteModal" onclick="deleteModalData(${user.id})" >Delete</button>
                              
                             </td>
                         </tr>)`;

@@ -17,8 +17,9 @@ async function editModalData(id) {
         method: 'get',
         dataType: 'json',
         success: function (data) {
-            $('idEdit').append(data.email);
-            firstnameEdit.value = data.firstname;
+
+            idEdit.value = data.id;
+            firstnameEdit.value = data.name;
             lastnameEdit.value = data.lastName;
             ageEdit.value = data.age;
             emailEdit.value = data.email;

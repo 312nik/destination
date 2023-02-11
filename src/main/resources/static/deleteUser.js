@@ -15,12 +15,12 @@ async function deleteModalData(id) {
         method: 'get',
         dataType: 'json',
         success: function (data) {
-            $('idEdit').append(data.email);
-            firstnameEdit.value = data.firstname;
-            lastnameEdit.value = data.lastName;
-            ageEdit.value = data.age;
-            emailEdit.value = data.email;
-            passwordEdit.value = data.password;
+            idDelete.value=data.id;
+            firstnameDelete.value = data.name;
+            lastnameDelete.value = data.lastName;
+            ageDelete.value = data.age;
+            emailDelete.value = data.email;
+            passwordDelete.value = data.password;
 
         },
         error: function (jqXHR, exception){

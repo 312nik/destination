@@ -33,8 +33,8 @@ public class AdminRestController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> showUser(@PathVariable("id") Integer id) {
-        User user = userService.showUser(id);
+    public ResponseEntity<User> showUser(@PathVariable("id") Long id) {
+        User user = userService.findById(id);
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
 

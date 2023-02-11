@@ -77,6 +77,7 @@
 									
 								<!--	      EDIT MODAL-->
 																				<div class="modal fade"  tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true" id="editModal">
+																					
 																					<div class="modal-dialog">
 																						<div class="modal-content">
 																							<form id="formEditing" autocomplete="off" >
@@ -138,8 +139,8 @@
 									
 									
 									
-									<!--DELETE MODAL-->
-									<!--      <div class="modal fade" th:id="${'deleteModal' + user.id}" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+									DELETE MODAL
+									      <div class="modal fade"  tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true"  id="deleteModal" >
 											  <div class="modal-dialog">
 												  <div class="modal-content">
 													  <div class="modal-header">
@@ -147,30 +148,30 @@
 														  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 													  </div>
 													  <div class="modal-body">
-														  <form  th:method="DELETE" th:action="@{/admin/delete/{id}(id=${user.id})}"  th:id="${'deleteForm' + user.id}">
+														  <form  id="formDelete">
 										
 										
 															  <div class="form-group  mx-auto text-centre ">
 											
 																  <label class="form-label d-block  pt-1  text-center fw-bold" for="idDelete">ID</label>
-																  <input th:value="${user.id}" type="text" class="form-control mx-auto w-50" id="idDelete"  disabled>
+																  <input  type="text" class="form-control mx-auto w-50" id="idDelete"  disabled>
 											
 											
 																  <label class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="nameDelete">First Name</label>
-																  <input th:value="${user.name}" type="text" class="form-control   mx-auto w-50" id="nameDelete" disabled>
+																  <input  type="text" class="form-control   mx-auto w-50" id="nameDelete" disabled>
 											
 																  <label class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="lastnameDelete">Last Name</label>
-																  <input th:value="${user.lastName}" type="text" class="form-control mx-auto  w-50" id="lastnameDelete" disabled >
+																  <input type="text" class="form-control mx-auto  w-50" id="lastnameDelete" disabled >
 											
 																  <label class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="ageDelete">Age</label>
-																  <input th:value="${user.age}" type="number" class="form-control mx-auto w-50" id="ageDelete"  disabled>
+																  <input  type="number" class="form-control mx-auto w-50" id="ageDelete"  disabled>
 											
 											
 																  <label  class="form-label d-block mx-auto pt-1  text-center  fw-bold" for="emailDelete">Email</label>
-																  <input th:value="${user.email}" type="email" class="form-control mx-auto w-50" id="emailDelete" disabled >
+																  <input type="email" class="form-control mx-auto w-50" id="emailDelete" disabled >
 											
 																  <label class="form-label d-block mx-auto pt-1  text-center fw-bold" for="passwordDelete">Password</label>
-																  <input th:value="${user.password}" type="password" class="form-control mx-auto w-50" id="passwordDelete"  disabled>
+																  <input  type="password" class="form-control mx-auto w-50" id="passwordDelete"  disabled>
 											
 											
 																  <label  for="rolesDelete" class="form-label d-block mx-auto pt-1 text-center  fw-bold">Role</label>
@@ -185,12 +186,12 @@
 													  <div class="modal-footer">
 														  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
 									
-														  <input type="submit" th:form="${'deleteForm' + user.id}" class="btn btn-danger " value="Delete"/>
+														  <input type="submit" class="btn btn-danger " value="Delete"/>
 									
 													  </div>
 												  </div>
 											  </div>
-										  </div>-->
+										  </div>
 									<!-- END DELETE MODAL-->
 								</table>
 								<!--       END USERS TABLE-->
@@ -293,6 +294,8 @@
 <script src="/user.js"></script>
 <script src="/users.js"></script>
 <script src="/addUser.js"></script>
+<script src="/editUser.js"></script>
+<script src="/deleteUser.js"></script>
 
 </body>
 

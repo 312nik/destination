@@ -11,7 +11,7 @@ function addNewUser() {
             .filter(option => option.selected)
             .map(option => option.value.toString());
 
-        let newUser= $('#addNewUser')
+        let newUser= document.forms['addNewUser'];
         let data = {
             name: newUser.firstname.value.trim,
             lastName: newUser.lastName.value.trim(),
