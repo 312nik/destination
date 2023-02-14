@@ -56,6 +56,9 @@ async function editUser() {
             roles: selected
         }
 
+
+        alert(dataEdit.name)
+
         function updateUser() {
             return $.ajax({
                 type: 'PATCH',
@@ -64,9 +67,9 @@ async function editUser() {
                 data: JSON.stringify(dataEdit)
             });
         }
+         alert("before when")
 
-
-        /*$.when(updateUser())
+        $.when(updateUser())
             .then(() => {
                 alert("1");
                 allUsers();
@@ -75,7 +78,7 @@ async function editUser() {
                 var tab = new bootstrap.Tab(someTabTriggerEl);
                 tab.show();
                 $('#closeEdit').click();
-            })*/
+            })
 
 }
 
