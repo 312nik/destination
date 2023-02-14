@@ -37,7 +37,7 @@ async function getEditModal(id) {
 
 
 
-async function editUser() {
+/*async function editUser() {
 
         let urlEdit = '/api/users/' + idEdit.value;
 
@@ -59,17 +59,18 @@ async function editUser() {
 
         alert(dataEdit.name)
 
-        function updateUser() {
+       async function updateUser() {
             return $.ajax({
                 type: 'PATCH',
                 headers: {'Content-Type': 'application/json'},
                 url: urlEdit,
-                data: JSON.stringify(dataEdit)
+                data: JSON.stringify(dataEdit),
+
             });
         }
          alert("before when")
 
-        $.when(updateUser())
+        /!*$.when(updateUser())
             .then(() => {
                 alert("1");
                 allUsers();
@@ -78,9 +79,9 @@ async function editUser() {
                 var tab = new bootstrap.Tab(someTabTriggerEl);
                 tab.show();
                 $('#closeEdit').click();
-            })
+            })*!/
 
-}
+}*/
 
 
 
