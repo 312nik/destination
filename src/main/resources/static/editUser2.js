@@ -31,6 +31,15 @@ async function editUser() {
                 headers: {'Content-Type': 'application/json'},
                 url: urlEdit,
                 data: JSON.stringify(dataEdit),
+                success:  function (data){
+                    console.log(data)
+                },
+                error: function (jqXHR, exception) {
+                    if (jqXHR.status === 409) {
+                        alert('User with this Email  already  exist');
+
+                    }
+                }
 
             });
         }

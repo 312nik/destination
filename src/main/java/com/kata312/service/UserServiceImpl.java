@@ -1,5 +1,7 @@
 package com.kata312.service;
 
+import Exeption.UserEmailDuplicateException;
+import Exeption.UserNotFoundException;
 import com.kata312.exception.RecordNotFoundException;
 import com.kata312.model.Role;
 import com.kata312.model.User;
@@ -28,7 +30,7 @@ public class UserServiceImpl  implements UserService {
 
     public User findById(Long id) {
 
-        return userRepository.findById(id).orElse(null);
+        return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 
     }
 
@@ -68,7 +70,9 @@ public class UserServiceImpl  implements UserService {
     public void saveUser(User user) {
 
 
-
+        if (findUserByEmail(user.getEmail()) != null){
+            throw new UserEmailDuplicateException();
+        }
 
         Set <Role> userRole =  new HashSet<>();
         for (Role role: user.getRoles() ) {
@@ -82,6 +86,10 @@ public class UserServiceImpl  implements UserService {
     @Override
     @Transactional
     public void updateUser(User user) {
+
+        if (findUserByEmail(user.getEmail()) != null){
+            throw new UserEmailDuplicateException();
+        }
 
 
         Set <Role> userRole =  new HashSet<>();

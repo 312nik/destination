@@ -1,5 +1,8 @@
 package com.kata312.controller;
 
+import Exeption.UserEmailDuplicateException;
+import Exeption.UserErrorResponse;
+import Exeption.UserNotFoundException;
 import com.kata312.exception.RecordNotFoundException;
 import com.kata312.model.User;
 import com.kata312.service.UserService;
@@ -57,6 +60,19 @@ public class AdminRestController {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
+
+
+    @ExceptionHandler
+    private ResponseEntity<UserErrorResponse> handleException(UserNotFoundException e){
+        UserErrorResponse response = new UserErrorResponse("User with this id was not found ");
+        return  new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+    };
+
+    @ExceptionHandler
+    private ResponseEntity<UserErrorResponse> handleException(UserEmailDuplicateException e){
+        UserErrorResponse response = new UserErrorResponse("User with this Email  already  exist");
+        return  new ResponseEntity<>(response, HttpStatus.CONFLICT);
+    };
 
 
 }

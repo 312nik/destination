@@ -34,7 +34,16 @@ async function addNewUser() {
                  type: 'POST',
                  headers: {'Content-Type': 'application/json'},
                  url: '/api/users',
-                 data: JSON.stringify(data)
+                 data: JSON.stringify(data),
+                 success:  function (data){
+                     console.log(data)
+                 },
+                 error: function (jqXHR, exception) {
+                   if (jqXHR.status === 409) {
+                       alert('User with this Email  already  exist');
+
+                   }
+                 }
              });
          }
 
