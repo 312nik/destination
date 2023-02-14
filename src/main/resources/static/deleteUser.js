@@ -6,7 +6,7 @@ const ageDelete=document.getElementById('ageDelete');
 const emailDelete=document.getElementById('emailDelete');
 const passwordDelete=document.getElementById('passwordDelete');
 
-async function deleteModalData(id) {
+async function getDeleteModal(id) {
 
     const urlEdit= '/api/users/' + id;
 

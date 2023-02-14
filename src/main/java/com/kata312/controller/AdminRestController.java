@@ -1,5 +1,6 @@
 package com.kata312.controller;
 
+import com.kata312.exception.RecordNotFoundException;
 import com.kata312.model.User;
 import com.kata312.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -40,22 +41,24 @@ public class AdminRestController {
 
     @PostMapping("/users")
     public ResponseEntity<HttpStatus> addUser(@RequestBody User user) {
+
         userService.saveUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
-/*
-    @PutMapping("/users/{id}")
-    public ResponseEntity<HttpStatus> editUser(@RequestBody User user, @PathVariable("id") Integer id) {
-        userService.updateUser(id, user);
-        return new ResponseEntity<>(HttpStatus.OK);
-    }*/
 
-/*    @DeleteMapping("/users/{id}")
-    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Integer id) {
+    @PatchMapping("/users/{id}")
+    public ResponseEntity<HttpStatus> editUser(@RequestBody User user) {
+        System.out.println("1");
+        System.out.println(user.toString());
+        userService.updateUser(user);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+   @DeleteMapping("/users/{id}")
+    public ResponseEntity<HttpStatus> deleteUser(@PathVariable("id") Long id) throws RecordNotFoundException {
         userService.deleteUser(id);
         return new ResponseEntity<>(HttpStatus.OK);
-    }*/
-
+    }
 
 
 }

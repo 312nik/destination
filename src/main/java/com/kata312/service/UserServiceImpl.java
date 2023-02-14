@@ -67,6 +67,9 @@ public class UserServiceImpl  implements UserService {
     @Transactional
     public void saveUser(User user) {
 
+
+
+
         Set <Role> userRole =  new HashSet<>();
         for (Role role: user.getRoles() ) {
             userRole.add(roleRepository.getRoleByName(role.getName()));
@@ -81,10 +84,19 @@ public class UserServiceImpl  implements UserService {
     public void updateUser(User user) {
 
 
+        Set <Role> userRole =  new HashSet<>();
+        for (Role role: user.getRoles() ) {
+            userRole.add(roleRepository.getRoleByName(role.getName()));
+        }
+        user.setRoles(userRole);
+
+
         if (user.getPassword().isEmpty()) {
             user.setPassword(userRepository.findById(user.getId()).get().getPassword());
+
         } else {
             user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
+
         }
         userRepository.save(user);
 
