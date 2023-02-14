@@ -1,5 +1,3 @@
-
-
 const formEdit = document.getElementById('formEditing');
 const idEdit=document.getElementById('idEdit');
 const firstnameEdit=document.getElementById('nameEdit');

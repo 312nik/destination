@@ -87,7 +87,8 @@ public class UserServiceImpl  implements UserService {
     @Transactional
     public void updateUser(User user) {
 
-        if (findUserByEmail(user.getEmail()) != null){
+        if (findUserByEmail(user.getUsername()) != null &&
+                !findUserByEmail(user.getUsername()).getId().equals(user.getId())){
             throw new UserEmailDuplicateException();
         }
 

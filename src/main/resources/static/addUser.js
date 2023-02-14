@@ -2,8 +2,6 @@ $(async function() {
     await addNewUser()
 });
 
-
-
 async function addNewUser() {
 
     $('#addNewUser').on('click', async function (event) {

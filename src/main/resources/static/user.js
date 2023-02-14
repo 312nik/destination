@@ -1,5 +1,8 @@
 
-getPrincipal();
+$(async function() {
+    await getPrincipal()
+});
+
 
 
 function getPrincipal() {
