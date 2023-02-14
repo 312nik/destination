@@ -28,16 +28,10 @@ public class AdminController {
 
     private final UserServiceImpl userService;
 
-
     @Autowired
     public AdminController(UserServiceImpl userService) {
-
         this.userService = userService;
-
-
     }
-
-
 
     @GetMapping("/admin")
     public String showAllUsers(Model model, Principal principal) {
@@ -49,12 +43,7 @@ public class AdminController {
         model.addAttribute("users", users);
         model.addAttribute("newUser",newUser);
         return "/admin";
-
-
-
     }
-
-
 
 @Transactional
     @PostMapping("admin/new")

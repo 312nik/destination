@@ -13,7 +13,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api")
 public class AdminRestController {
-
     private final UserService userService;
 
     public AdminRestController(UserService userService) {
@@ -48,8 +47,7 @@ public class AdminRestController {
 
     @PatchMapping("/users/{id}")
     public ResponseEntity<HttpStatus> editUser(@RequestBody User user) {
-        System.out.println("1");
-        System.out.println(user.toString());
+
         userService.updateUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }

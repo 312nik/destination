@@ -15,14 +15,11 @@ import java.security.Principal;
 public class UserRestController {
 
     private final UserService userService;
-
-
-
     public UserRestController(UserService userService) {
         this.userService = userService;
     }
 
-// НедоREST ;)
+
 
     @GetMapping("/user")
     public ResponseEntity<User> showUser(Principal principal) {
