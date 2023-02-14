@@ -1,4 +1,3 @@
-const formDelete = document.getElementById('formDelete');
 const idDelete=document.getElementById('idDelete');
 const firstnameDelete=document.getElementById('nameDelete');
 const lastnameDelete=document.getElementById('lastnameDelete');
