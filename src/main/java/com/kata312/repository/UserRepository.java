@@ -10,11 +10,6 @@ import javax.persistence.Entity;
 
 @Repository
 public interface UserRepository extends JpaRepository <User,Long> {
-
     @EntityGraph (attributePaths = "roles")
-
     User findUserByEmail(String email);
-
-
-
 }

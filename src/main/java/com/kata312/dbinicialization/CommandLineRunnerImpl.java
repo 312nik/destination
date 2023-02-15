@@ -23,10 +23,7 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-
         if(userRepository.findAll().isEmpty()){
-
-
         roleRepository.save(new Role("ROLE_ADMIN"));
         roleRepository.save(new Role("ROLE_USER"));
         Role adminRole = roleRepository.getRoleById(1L);
@@ -36,12 +33,6 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         adminRoles.add(userRole);
         Set <Role> userRoles= new HashSet<>();
         userRoles.add(userRole);
-
-
-
-
-
-
 
         User admin= new User();
         admin.setName("Admin");
@@ -60,9 +51,6 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         user.setPassword("$2a$12$KfgcyoMND4XibkwHgKmMX.xqTxnfalroJaOl2ewvxVUWK5sqd/tSi"); //user
         user.setRoles(userRoles);
         userRepository.save(user);}
-
-
-
 
     }
 }

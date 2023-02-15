@@ -22,7 +22,6 @@ public class AdminRestController {
         this.userService = userService;
     }
 
-
     @GetMapping("/admin")
     public ResponseEntity<User> showAdminPersonalPage(Principal principal) {
         User user = userService.findUserByEmail(principal.getName());
@@ -43,14 +42,12 @@ public class AdminRestController {
 
     @PostMapping("/users")
     public ResponseEntity<HttpStatus> addUser(@RequestBody User user) {
-
         userService.saveUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PatchMapping("/users/{id}")
     public ResponseEntity<HttpStatus> editUser(@RequestBody User user) {
-
         userService.updateUser(user);
         return new ResponseEntity<>(HttpStatus.OK);
     }

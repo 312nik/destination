@@ -19,8 +19,6 @@ public class UserRestController {
         this.userService = userService;
     }
 
-
-
     @GetMapping("/user")
     public ResponseEntity<User> showUser(Principal principal) {
         User user = userService.findUserByEmail(principal.getName());
