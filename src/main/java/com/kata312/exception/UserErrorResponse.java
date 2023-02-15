@@ -1,4 +1,4 @@
-package Exeption;
+package com.kata312.exception;
 
 public class UserErrorResponse {
     private String massage;

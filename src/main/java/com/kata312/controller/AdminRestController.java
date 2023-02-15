@@ -1,8 +1,8 @@
 package com.kata312.controller;
 
-import Exeption.UserEmailDuplicateException;
-import Exeption.UserErrorResponse;
-import Exeption.UserNotFoundException;
+import com.kata312.exception.UserEmailDuplicateException;
+import com.kata312.exception.UserErrorResponse;
+import com.kata312.exception.UserNotFoundException;
 import com.kata312.exception.RecordNotFoundException;
 import com.kata312.model.User;
 import com.kata312.service.UserService;
