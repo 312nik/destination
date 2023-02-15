@@ -1,6 +1,6 @@
 package com.kata312.config;
 
-import com.kata312.service.UserServiceImpl;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
