@@ -6,7 +6,6 @@ import com.kata312.repository.RoleRepository;
 import com.kata312.repository.UserRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
-
 import java.util.HashSet;
 import java.util.Set;
 
