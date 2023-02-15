@@ -8,6 +8,7 @@ import com.kata312.model.User;
 import com.kata312.repository.RoleRepository;
 import com.kata312.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -22,7 +23,7 @@ public class UserServiceImpl  implements UserService {
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bcryptPasswordEncoder;
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository, BCryptPasswordEncoder bcryptPasswordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, RoleRepository roleRepository,@Lazy BCryptPasswordEncoder bcryptPasswordEncoder) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
         this.bcryptPasswordEncoder = bcryptPasswordEncoder;

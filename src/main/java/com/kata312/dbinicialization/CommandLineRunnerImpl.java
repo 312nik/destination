@@ -1,4 +1,4 @@
-package com.kata312.DBInicialization;
+package com.kata312.dbinicialization;
 
 import com.kata312.model.Role;
 import com.kata312.model.User;
