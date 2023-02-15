@@ -116,7 +116,6 @@ public class User  implements UserDetails {
         assert getRoles != null;
         return  getRoles.trim();
     }
-
     @Override
     public String toString() {
         return "User{" +

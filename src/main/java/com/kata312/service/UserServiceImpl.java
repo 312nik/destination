@@ -18,7 +18,6 @@ import java.util.*;
 @Service
 
 public class UserServiceImpl  implements UserService {
-
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
     private final BCryptPasswordEncoder bcryptPasswordEncoder;
@@ -30,14 +29,8 @@ public class UserServiceImpl  implements UserService {
     }
 
     public User findById(Long id) {
-
         return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
-
     }
-
-
-
-
     public List<User> findAll() {
         List<User> result = (List<User>) userRepository.findAll();
         if (result.size() > 0) {
@@ -46,11 +39,7 @@ public class UserServiceImpl  implements UserService {
             return new ArrayList<User>();
         }
     }
-
-
-
-
-@Transactional
+    @Transactional
     public  void deleteUser(Long id)
             throws RecordNotFoundException {
         Optional<User> user = userRepository.findById(id);
@@ -61,20 +50,15 @@ public class UserServiceImpl  implements UserService {
                     ("No user record exist for given id");
         }
     }
-
     @Override
     public User findUserByEmail(String email) {
         return userRepository.findUserByEmail(email);
     }
-
     @Transactional
     public void saveUser(User user) {
-
-
         if (findUserByEmail(user.getEmail()) != null){
             throw new UserEmailDuplicateException();
         }
-
         Set <Role> userRole =  new HashSet<>();
         for (Role role: user.getRoles() ) {
             userRole.add(roleRepository.getRoleByName(role.getName()));
@@ -83,34 +67,24 @@ public class UserServiceImpl  implements UserService {
         user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
         userRepository.save(user);
     }
-
     @Override
     @Transactional
     public void updateUser(User user) {
-
         if (findUserByEmail(user.getUsername()) != null &&
                 !findUserByEmail(user.getUsername()).getId().equals(user.getId())){
             throw new UserEmailDuplicateException();
         }
-
-
         Set <Role> userRole =  new HashSet<>();
         for (Role role: user.getRoles() ) {
             userRole.add(roleRepository.getRoleByName(role.getName()));
         }
         user.setRoles(userRole);
-
-
         if (user.getPassword().isEmpty()) {
             user.setPassword(userRepository.findById(user.getId()).get().getPassword());
-
         } else {
             user.setPassword(bcryptPasswordEncoder.encode(user.getPassword()));
-
         }
         userRepository.save(user);
-
-
   }
 }
 

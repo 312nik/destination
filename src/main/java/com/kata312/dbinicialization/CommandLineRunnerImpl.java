@@ -19,11 +19,11 @@ public class CommandLineRunnerImpl implements CommandLineRunner {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
     }
-
     @Override
     public void run(String... args) throws Exception {
 
         if(userRepository.findAll().isEmpty()){
+
         roleRepository.save(new Role("ROLE_ADMIN"));
         roleRepository.save(new Role("ROLE_USER"));
         Role adminRole = roleRepository.getRoleById(1L);
