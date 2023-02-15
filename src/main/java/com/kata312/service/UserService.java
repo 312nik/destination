@@ -2,7 +2,6 @@ package com.kata312.service;
 
 import com.kata312.exception.RecordNotFoundException;
 import com.kata312.model.User;
-
 import java.util.List;
 
 public interface UserService {

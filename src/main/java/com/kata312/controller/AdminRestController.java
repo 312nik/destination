@@ -9,7 +9,6 @@ import com.kata312.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.security.Principal;
 import java.util.List;
 
@@ -25,13 +24,11 @@ public class AdminRestController {
         User user = userService.findUserByEmail(principal.getName());
         return new ResponseEntity<>(user, HttpStatus.OK);
     }
-
     @GetMapping("/users")
     public ResponseEntity<List<User>> showAdminGeneralPage() {
         List<User> users = userService.findAll();
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
-
     @GetMapping("/users/{id}")
     public ResponseEntity<User> showUser(@PathVariable("id") Long id) {
         User user = userService.findById(id);

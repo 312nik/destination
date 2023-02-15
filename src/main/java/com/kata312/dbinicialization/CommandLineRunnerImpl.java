@@ -14,7 +14,6 @@ import java.util.Set;
 public class CommandLineRunnerImpl implements CommandLineRunner {
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
-
     public CommandLineRunnerImpl(UserRepository userRepository, RoleRepository roleRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;

@@ -1,7 +1,6 @@
 package com.kata312.model;
 
 import org.springframework.security.core.GrantedAuthority;
-
 import javax.persistence.*;
 import java.util.Objects;
 

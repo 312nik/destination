@@ -12,7 +12,6 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import java.util.*;
 
 @Service
@@ -27,7 +26,6 @@ public class UserServiceImpl  implements UserService {
         this.roleRepository = roleRepository;
         this.bcryptPasswordEncoder = bcryptPasswordEncoder;
     }
-
     public User findById(Long id) {
         return userRepository.findById(id).orElseThrow(UserNotFoundException::new);
     }
