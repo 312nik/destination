@@ -7,7 +7,10 @@ import org.springframework.stereotype.Repository;
 
 
 @Repository
-public interface UserRepository extends JpaRepository <User,Long> {
-    @EntityGraph (attributePaths = "roles")
-    User findUserByEmail(String email);
+public interface DestinationRepository extends JpaRepository<Destination, String> {
+
+    List<Destination> findByOrderByCity(String city);
+    List<Destination> findByOrderByCountryName(String countryName);
+
 }
+
