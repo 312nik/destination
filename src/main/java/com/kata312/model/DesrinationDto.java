@@ -1,3 +1,9 @@
+package ru.uxair.flight.entity.dto;
+
+import lombok.*;
+import javax.validation.constraints.*;
+
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -16,10 +22,11 @@ public class DestinationDto {
     @NotBlank(message = "Country name cannot be empty")
     private String countryName;
 
-    @NotBlank(message = "Airpourt name cannot be empty")
+    @NotBlank(message = "Airport name cannot be empty")
     private String airportName;
 
 
-    @Pattern (regexp = " [A-Z]{2}|[A-Z]{2}+[1-9]{2}|[A-Z]{2}+[1-9]{1}+[A-Z]{1}", message = "timezone code should be in the format XX or XX11 or XX1X")
+    @Pattern (regexp = " [A-Z]{2}|[A-Z]{2}+[1-9]{2}|[A-Z]{2}+[1-9]{1}+[A-Z]{1}", message = "Timezone code should be in the format XX or XX11 or XX1X")
     private String timezone;
 }
+
