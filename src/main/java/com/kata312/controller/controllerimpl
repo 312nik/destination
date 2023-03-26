@@ -1,0 +1,68 @@
+package ru.uxair.flight.controller.impl;
+
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+import ru.uxair.flight.controller.DestinationController;
+import ru.uxair.flight.entity.dto.DestinationDto;
+import ru.uxair.flight.service.DestinationService;
+import ru.uxair.flight.util.mapper.DestinationMapper;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/destinations")
+
+public class DestinationControllerImpl implements DestinationController {
+
+    private final DestinationService service;
+    private final DestinationMapper mapper;
+
+
+    public DestinationControllerImpl(DestinationService service, DestinationMapper mapper) {
+        this.service = service;
+        this.mapper = mapper;
+    }
+
+
+    @Override
+    @GetMapping("/{id}")
+    public ResponseEntity<DestinationDto> getDestinationById(@PathVariable String id) {
+        DestinationDto destinationDto = mapper.convertToDestinationDto(service.findDestinationById(id));
+        return new ResponseEntity<>(destinationDto, HttpStatus.OK);
+    }
+
+    @Override
+    @GetMapping("/{city}")
+    public ResponseEntity<DestinationDto> getDestinationByCity(@PathVariable String city) {
+        return ResponseEntity.ok((DestinationDto) mapper.mapList(service.findDestinationByCity(city),DestinationDto.class));
+    }
+
+    @Override
+    @GetMapping("/{countryName}")
+    public ResponseEntity<DestinationDto> getDestinationByCountry(@PathVariable String countryName) {
+        return ResponseEntity.ok((DestinationDto) mapper.mapList(service.findDestinationBy(city),DestinationDto.class));
+    }
+    }
+
+    @Override
+    @PostMapping
+    public ResponseEntity<HttpStatus> createDestination(DestinationDto destinationDto) {
+        service.saveDestination(mapper.convertToDestination(destinationDto));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    @PutMapping
+    public ResponseEntity<HttpStatus> updateDestination(DestinationDto destinationDto) {
+        service.updateDestination(mapper.convertToDestination(destinationDto));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @Override
+    @DeleteMapping
+    public ResponseEntity <HttpStatus> deleteDestination(DestinationDto destinationDto) {
+        service.deleteDestination (mapper.convertToDestination(destinationDto));
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+}
