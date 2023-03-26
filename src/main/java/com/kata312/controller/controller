@@ -1,0 +1,20 @@
+package ru.uxair.flight.controller;
+
+import org.hibernate.annotations.Parameter;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import ru.uxair.flight.entity.dto.DestinationDto;
+
+@RequestMapping("/api/destinations")
+
+public interface DestinationController {
+    ResponseEntity <DestinationDto> getDestinationById(@PathVariable(value = "id") String id);
+    ResponseEntity <DestinationDto>  getDestinationByCity (@PathVariable (value="city") String city);
+    ResponseEntity <DestinationDto>  getDestinationByCountry (@PathVariable(value="countryName") String countryName);
+    ResponseEntity <HttpStatus> createDestination (@RequestBody DestinationDto destinationDto);
+    ResponseEntity<HttpStatus> updateDestination (@RequestBody  DestinationDto destinationDto);
+    ResponseEntity<HttpStatus> deleteDestination (@RequestBody  DestinationDto destinationDto);
+}
