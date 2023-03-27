@@ -1,0 +1,39 @@
+  -  changeSet:  
+      id: 20230327-flight-add-destination-entity
+      author:  moiseev nikolay
+      changes:  
+        -  createTable:  
+            tableName:  destinations
+            columns:  
+              -  column:  
+                  name:  id  
+                  type:  varchar
+                  autoIncrement:  false 
+                  constraints:  
+                    primaryKey:  true  
+                    nullable:  false  
+              -  column:  
+                  name:  city
+                  type:  varchar(255) 
+                   constraints:  
+                     nullable:  false  
+              -  column:  
+                  name:  country_code
+                  type:  varchar(2)  
+                  constraints:  
+                    nullable:  false  
+              -  column:  
+                  name:  country_name  
+                  type:  char(255)
+                   constraints:  
+                    nullable:  false
+                -  column:  
+                  name:  airport_name  
+                  type:  char(255)
+                   constraints:  
+                    nullable:  false  
+                -  column:  
+                  name:  timezone
+                  type:  char(4)
+                   constraints:  
+                    nullable:  false         
