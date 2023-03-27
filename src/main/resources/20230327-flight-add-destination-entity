@@ -1,0 +1,20 @@
+- changeSet:
+      id: 20230327-flight-add-destination-entity
+      author: moiseev nikolay
+        changes:
+              - sqlFile:
+              dbms: oracle
+              encoding: cp1251
+              path: /flight-service/src/main/resources/20230327-flight-add-destination-entity.sql
+              relativeToChangelogFile: true
+              splitStatements: true
+              stripComments: false
+       rollback:
+              - sqlFile:
+              dbms: oracle
+              encoding: cp1251
+              path: /flight-service/src/main/resources/20230327-flight-drop-destination-entity.sql
+              relativeToChangelogFile: true
+              splitStatements: true
+              stripComments: false
+        
