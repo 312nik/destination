@@ -5,7 +5,7 @@
               - sqlFile:
               dbms: oracle
               encoding: cp1251
-              path: /flight-service/src/main/resources/20230327-flight-add-destination-entity.sql
+              path: /flight-service/src/main/resources/CreateDestinationTable.sql.sql
               relativeToChangelogFile: true
               splitStatements: true
               stripComments: false
@@ -13,7 +13,7 @@
               - sqlFile:
               dbms: oracle
               encoding: cp1251
-              path: /flight-service/src/main/resources/20230327-flight-drop-destination-entity.sql
+              path: /flight-service/src/main/resources/DropDestinationTable.sql.sql
               relativeToChangelogFile: true
               splitStatements: true
               stripComments: false
