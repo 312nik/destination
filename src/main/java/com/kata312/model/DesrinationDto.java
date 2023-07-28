@@ -1,32 +1,27 @@
-package ru.uxair.flight.entity.dto;
+package ru.uxair.flight.entity;
 
-import lombok.*;
-import javax.validation.constraints.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 
+import javax.persistence.*;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Entity
+@Getter
+@Setter
+@ToString
+@RequiredArgsConstructor
+@Table(name="destinations")
 
-public class DestinationDto {
-
-    @Pattern(regexp = "[A-Z]{3}", message = "Airport code must have format XXX")
+public class Destination {
+    @Id
+    @GeneratedValue (strategy = GenerationType.IDENTITY)
+    private Long id;
     private String airportCode;
-
-    @NotBlank(message = "Name of city cannot be empty")
     private String city;
-
-    @Pattern (regexp = "[A-Z]{2}", message = "Country code should be in the format XX")
     private String countryCode;
-
-    @NotBlank(message = "Country name cannot be empty")
     private String countryName;
-
-    @NotBlank(message = "Airport name cannot be empty")
     private String airportName;
-
-
-    @Pattern (regexp = " [A-Z]{2}|[A-Z]{2}+[1-9]{2}|[A-Z]{2}+[1-9]{1}+[A-Z]{1}", message = "Timezone code should be in the format XX or XX11 or XX1X")
     private String timezone;
 }
-
